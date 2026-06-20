@@ -38,10 +38,12 @@ export async function buildPackZip(slug: string): Promise<Buffer> {
     throw new Error(`ORCHESTRATOR.md not found at: ${orchestratorPath}`);
   }
 
-  addFolderToZip(zip, packPath, packFolderName);
+  // Files go at the zip root (no subfolder) so SKILL.md is found at root,
+  // which is required by Claude Code's zip import.
+  addFolderToZip(zip, packPath, "");
 
   const orchestratorContent = fs.readFileSync(orchestratorPath);
-  zip.file(`${packFolderName}/ORCHESTRATOR.md`, orchestratorContent);
+  zip.file("ORCHESTRATOR.md", orchestratorContent);
 
   const buffer = await zip.generateAsync({
     type: "nodebuffer",
