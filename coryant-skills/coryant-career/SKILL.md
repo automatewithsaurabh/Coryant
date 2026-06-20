@@ -1,4 +1,5 @@
 ---
+name: coryant-career
 description: Career intelligence research for job applications, interview prep, salary negotiation, and go/no-go career decisions. Requires web search enabled.
 argument-hint: <brief: company, role, moment type (application/interview/negotiation/decision), and your background>
 ---

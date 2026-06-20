@@ -1,4 +1,5 @@
 ---
+name: coryant-pm
 description: Product management research for roadmap decisions, internal buy-in documents, and external positioning or launch content. Requires web search enabled.
 argument-hint: <brief: feature/product area, audience type (internal roadmap or external positioning), and the decision or document needed>
 ---

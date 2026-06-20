@@ -1,4 +1,5 @@
 ---
+name: coryant-gtm
 description: Go-to-market intelligence research for market entry, competitive positioning, budget allocation, whitespace identification, and GTM diagnostics. Requires web search enabled.
 argument-hint: <brief: market/category, geography, key competitors if known, and the GTM decision pending>
 ---
