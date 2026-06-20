@@ -26,6 +26,7 @@ export default function PacksSection() {
   return (
     <section
       id="packs"
+      className="mob-section"
       style={{
         position: "relative",
         background: "var(--bg)",
@@ -177,6 +178,8 @@ export default function PacksSection() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "16px",
           }}
         >
           <p

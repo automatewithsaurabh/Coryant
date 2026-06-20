@@ -19,6 +19,7 @@ export default function LoginPage() {
     >
       {/* minimal nav */}
       <nav
+        className="mob-nav"
         style={{
           display: "flex",
           alignItems: "center",

@@ -34,6 +34,7 @@ export default function DashboardClient({
 
       {/* ── TOP NAV ── */}
       <nav
+        className="mob-nav"
         style={{
           display: "flex",
           alignItems: "center",
@@ -58,8 +59,8 @@ export default function DashboardClient({
           CORYANT
         </span>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink-faint)" }}>
+        <div className="dash-nav-right" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <span className="dash-email" style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink-faint)" }}>
             {email}
           </span>
           <button
@@ -81,7 +82,7 @@ export default function DashboardClient({
         </div>
       </nav>
 
-      <div style={{ flex: 1, maxWidth: "1100px", width: "100%", margin: "0 auto", padding: "56px 48px" }}>
+      <div className="mob-section" style={{ flex: 1, maxWidth: "1100px", width: "100%", margin: "0 auto", padding: "56px 48px" }}>
 
         {/* ── WELCOME ── */}
         <div style={{ marginBottom: "56px", paddingBottom: "40px", borderBottom: "1px solid var(--rule)" }}>
@@ -134,6 +135,7 @@ export default function DashboardClient({
             {packs.map((pack) => (
               <div
                 key={pack.slug}
+                className="dash-pack-row"
                 style={{
                   background: "var(--bg)",
                   padding: "36px 40px",
@@ -285,6 +287,7 @@ export default function DashboardClient({
 
         {/* ── INSTALL REMINDER ── */}
         <div
+          className="dash-install"
           style={{
             marginTop: "48px",
             padding: "28px 32px",
@@ -350,8 +353,12 @@ export default function DashboardClient({
 
       <style>{`
         @media (max-width: 768px) {
-          .dash-pack-row { grid-template-columns: 1fr !important; }
+          .dash-pack-row { grid-template-columns: 1fr !important; gap: 24px !important; }
           .dash-install { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .dash-email { display: none !important; }
+          .dash-pack-row { padding: 24px 20px !important; }
         }
       `}</style>
     </div>

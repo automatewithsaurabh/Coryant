@@ -20,6 +20,7 @@ export default function ArchitectureSection() {
   return (
     <section
       id="architecture"
+      className="mob-section"
       style={{
         position: "relative",
         background: "var(--bg-raised)",

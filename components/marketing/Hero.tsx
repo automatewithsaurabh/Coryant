@@ -18,6 +18,7 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
 
       {/* NAV */}
       <nav
+        className="hero-nav"
         style={{
           position: "relative",
           zIndex: 1,
@@ -42,6 +43,7 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
 
         <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
           <div
+            className="hero-nav-links"
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "12px",
@@ -191,6 +193,13 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
         }
         @media (max-width: 768px) {
           .hero-h1 { font-size: 32px !important; }
+        }
+        @media (max-width: 640px) {
+          .hero-nav { padding: 16px 20px !important; }
+          .hero-nav-links { display: none !important; }
+        }
+        @media (max-width: 480px) {
+          .hero-h1 { font-size: 26px !important; }
         }
       `}</style>
     </section>

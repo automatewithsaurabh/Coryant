@@ -9,6 +9,7 @@ const communityLinks = [
 export default function Footer() {
   return (
     <footer
+      className="mob-section"
       style={{
         borderTop: "1px solid var(--rule)",
         background: "var(--bg)",

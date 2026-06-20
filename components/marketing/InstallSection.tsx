@@ -23,6 +23,7 @@ export default function InstallSection() {
   return (
     <section
       id="get-started"
+      className="mob-section"
       style={{
         position: "relative",
         background: "var(--bg)",

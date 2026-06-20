@@ -60,3 +60,15 @@ button {
 .hover-accent-border:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
 .hover-dim:hover { opacity: 0.85 !important; }
 .transition-fast { transition: color 150ms ease, border-color 150ms ease, opacity 150ms ease; }
+
+/* Mobile responsive overrides */
+@media (max-width: 768px) {
+  .mob-section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .mob-nav {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}

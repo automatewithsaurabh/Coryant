@@ -38,6 +38,7 @@ export default function PipelineTrace() {
   return (
     <section
       id="pipeline"
+      className="mob-section"
       style={{
         position: "relative",
         background: "var(--bg-raised)",

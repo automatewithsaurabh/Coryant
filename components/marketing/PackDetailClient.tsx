@@ -20,6 +20,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 1. BREADCRUMB BAR ── */}
       <div
+        className="mob-nav"
         style={{
           display: "flex",
           alignItems: "center",
@@ -49,6 +50,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 2. HERO BLOCK ── */}
       <section
+        className="mob-section"
         style={{
           position: "relative",
           padding: "64px 48px 48px",
@@ -168,6 +170,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 3. OVERVIEW ── */}
       <section
+        className="mob-section"
         style={{
           padding: "64px 48px",
           borderBottom: "1px solid var(--rule)",
@@ -191,6 +194,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 4. AGENT ROSTER ── */}
       <section
+        className="mob-section"
         style={{
           padding: "64px 48px",
           borderBottom: "1px solid var(--rule)",
@@ -260,6 +264,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 5. OUTPUT MODES ── */}
       <section
+        className="mob-section"
         style={{
           padding: "64px 48px",
           borderBottom: "1px solid var(--rule)",
@@ -335,6 +340,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
       {/* ── 6. INSTALL ── */}
       <section
         id="install"
+        className="mob-section"
         style={{
           padding: "64px 48px",
           borderBottom: "1px solid var(--rule)",
@@ -489,6 +495,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 7. EXAMPLE BRIEF ── */}
       <section
+        className="mob-section"
         style={{
           padding: "64px 48px",
           borderBottom: "1px solid var(--rule)",
@@ -531,6 +538,7 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
 
       {/* ── 8. OTHER PACKS ── */}
       <section
+        className="mob-section"
         style={{
           padding: "64px 48px",
           borderBottom: "1px solid var(--rule)",
