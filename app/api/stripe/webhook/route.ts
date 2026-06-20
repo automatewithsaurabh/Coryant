@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/server";
 import type Stripe from "stripe";
 
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
   let event: Stripe.Event;
   try {
     const rawBody = await request.text();
-    event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
+    event = getStripe().webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err) {
     // Signature mismatch — reject immediately. Do not log the body.
     console.error("Webhook signature verification failed:", err instanceof Error ? err.message : err);
