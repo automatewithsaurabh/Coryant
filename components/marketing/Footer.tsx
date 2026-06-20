@@ -3,7 +3,6 @@ const communityLinks = [
   { label: "Discord", href: "#discord" },
   { label: "X / Twitter", href: "#twitter" },
   { label: "GitHub", href: "#github" },
-  { label: "hello@coryant.ai", href: "mailto:hello@coryant.ai" },
 ];
 
 export default function Footer() {

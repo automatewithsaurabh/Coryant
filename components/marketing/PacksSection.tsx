@@ -191,20 +191,16 @@ export default function PacksSection() {
           >
             More packs in progress: Student, Founder, role-specific
           </p>
-          <a
-            href="mailto:hello@coryant.ai?subject=Pack%20request"
-            className="hover-accent transition-fast"
+          <span
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "12px",
-              color: "var(--ink-soft)",
-              textDecoration: "underline",
-              textUnderlineOffset: "3px",
+              color: "var(--ink-faint)",
               whiteSpace: "nowrap",
             }}
           >
-            Request a pack →
-          </a>
+            More coming soon
+          </span>
         </div>
       </div>
 
