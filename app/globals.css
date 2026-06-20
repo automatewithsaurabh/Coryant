@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #eae8e1;
+  --bg-raised: #e0ddd6;
+  --bg-panel: #1e1c19;
+  --ink: #111110;
+  --ink-soft: #48453f;
+  --ink-faint: #807c74;
+  --ink-ghost: #c4c0b8;
+  --rule: rgba(0,0,0,0.08);
+  --rule-strong: rgba(0,0,0,0.15);
+  --accent: #00d944;
+  --accent-dim: rgba(0,217,68,0.10);
+  --accent-border: rgba(0,217,68,0.35);
+  --status-active: #00d944;
+  --status-active-dim: rgba(0,217,68,0.12);
+  --font-mono: var(--font-jetbrains), 'IBM Plex Mono', monospace;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Hover utilities — used across marketing components */
+.hover-accent:hover { color: var(--accent) !important; }
+.hover-accent-border:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+.hover-dim:hover { opacity: 0.85 !important; }
+.transition-fast { transition: color 150ms ease, border-color 150ms ease, opacity 150ms ease; }
