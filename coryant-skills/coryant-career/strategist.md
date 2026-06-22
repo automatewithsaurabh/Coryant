@@ -175,3 +175,21 @@ correctly:
   FULL_PREP → all outputs combined in one document; lead with
     the executive summary then present each agent's output
     in logical application-→-prep-→-negotiation order
+
+**Risk Flags instruction:** Tell the Synthesizer that a Risk
+Flags section (3–5 `.contra` boxes) must appear immediately
+after the Moment-Type Output section, before Synthesis. Each
+risk flag must be specific to the candidate's situation and
+this company at this moment — not generic interview advice.
+Skip only for STORY_BUILD (that output has gap analysis
+instead). For FULL_PREP, consolidate risks across all moment
+types into one section near the end.
+
+**Source attribution instruction:** Tell the Synthesizer that
+every specific number in the final report — compensation
+figures, company headcount, funding amount, hiring pace data,
+competitive bar estimates — must be followed by
+`(Source Name, Year)`. Any number that cannot be attributed
+to a named source must be flagged `[LOW CONFIDENCE — estimate]`
+or removed. This is especially critical for compensation
+sections, where unsourced numbers mislead candidates.

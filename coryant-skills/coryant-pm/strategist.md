@@ -183,3 +183,21 @@ the output should produce:
   PRD_PREP → structured PRD-input HTML doc, use mode-internal.md
     with sections: Problem, Users & Jobs, Competitive Context,
     Timing, Success Metrics, Open Questions
+
+**Risk Flags instruction:** Tell the Synthesizer that a Risk
+Flags section (3–5 `.contra` boxes) must appear immediately
+after the core decision-type output section — before Open
+Questions for internal reports, and as the named Risk Check
+inside the Positioning Output for external reports. Each
+risk flag must be specific to the recommendation, not generic.
+"Competitor may respond" is not a risk flag — name the
+competitor, name the specific move, name the timeline.
+
+**Source attribution instruction:** Tell the Synthesizer that
+every specific number in the final report (competitor launch
+date, market size, user survey stat, growth rate, feature
+adoption figure) must be followed by `(Source Name, Year)`.
+Any number that cannot be attributed to a named source must
+be removed or explicitly flagged `[LOW CONFIDENCE — single
+source]`. This applies equally to internal and external
+report modes.

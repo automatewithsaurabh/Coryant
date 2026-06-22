@@ -194,11 +194,13 @@ Follow with `.stat-strip` of 4 numbers (competitor launch date, user pain freque
 
 ### 4. Research Sections
 
-**User Signal** — Real user language: verbatim phrases from forums, reviews, support tickets, social. Use `.lang-card` blocks to show actual quotes with source and why they're important for copy. Do not paraphrase — show what users actually say.
+**Visual-first rule**: Every research section must include at least one visual component. In priority order: `.bar-chart` for comparisons, `.hire-grid` for categorical signals, `.lang-card` for verbatim user quotes. Text tables are last resort only.
 
-**Competitor Feature** — What competitors have shipped, announced, or positioned around. Bar chart of capability comparison (who owns what territory in this category). Explicitly state which positioning angles are already claimed and which are open.
+**User Signal** — Real user language: verbatim phrases from forums, reviews, support tickets, social. Use `.lang-card` blocks to show actual quotes with source attribution (platform, date) and why they're important for copy. Do not paraphrase — show what users actually say.
 
-**Market Timing** — Is the category narrative ready for this claim? Use a `.hire-grid` showing timing signals (Early Adopter Phase / Mainstream Ready / Late / Narrative Saturated / Competitor Already Here / Window Closing).
+**Competitor Feature** — What competitors have shipped, announced, or positioned around. Use a `.bar-chart` for capability comparison — name each competitor explicitly on the bars, never generic placeholders. Explicitly state which positioning angles are already claimed and which are open. Every claimed angle must have a named competitor behind it.
+
+**Market Timing** — Is the category narrative ready for this claim? Use a `.hire-grid` showing timing signals (Early Adopter Phase / Mainstream Ready / Late / Narrative Saturated / Competitor Already Here / Window Closing). Every cell must include a specific evidence note.
 
 **Stakeholder Context (External half)** — What kind of framing or announcement actually cuts through in this specific category right now. What has been done to death. What is genuinely new. This section directly informs what NOT to say as much as what to say.
 
@@ -219,11 +221,11 @@ Follow with `.stat-strip` of 4 numbers (competitor launch date, user pain freque
 
 **Non-Obvious Patterns** — 2–3 `.pattern-card` blocks connecting user language, competitor gaps, and timing in ways that suggest a positioning angle nobody else is currently using.
 
-**Risk Check** — A dedicated section with `.contra` boxes for:
-- Any claim that has been made and disputed before in this category
-- A competitor weakness that is actually shared across the category (claiming it backfires)
-- A sensitive area in the current market narrative
-- Any timing risk (the window may be closing, or the category may not be ready)
+**Risk Check** — A dedicated section with `.contra` boxes labelled "RISK [N] — [SHORT NAME]". For each risk:
+- Name it specifically: which claim could backfire, which competitor already owns adjacent territory, which timing window is closing
+- State the evidence that makes this a real risk, not a hypothetical
+- State what condition would trigger it
+- Do not write generic risks ("market may not be ready"). Write specific ones ("Figma's March 2026 AI design brief positions around 'instant production assets' — using similar language will read as a copy, not differentiation")
 
 ### 6. Open Questions
 
@@ -240,9 +242,33 @@ Right: Date + "Prepared for external-facing use" + disclaimer that all competiti
 
 ---
 
+## Component Rules
+
+**Bar charts** — use for capability territory mapping (who owns what claim). The widest bar is always 100%. Use `.bf-brand` for the subject product, `.bf-danger` for the most entrenched competitor, `.bf-muted` for neutral, `.bf-green` for an unclaimed opening.
+
+Bar chart skeleton (name every competitor explicitly — no "Competitor A"):
+```html
+<div class="chart-block">
+  <div class="chart-label">POSITIONING TERRITORY — WHO OWNS WHAT</div>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-lbl">Our Product</div><div class="bar-track"><div class="bar-fill bf-brand" style="width:40%">Emerging</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor Name</div><div class="bar-track"><div class="bar-fill bf-danger" style="width:85%">Entrenched</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor Name 2</div><div class="bar-track"><div class="bar-fill bf-warm" style="width:55%">Partial</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Open Territory</div><div class="bar-track"><div class="bar-fill bf-green" style="width:20%">Available</div></div></div>
+  </div>
+</div>
+```
+
+**Hire grid** — use for timing signals. Every cell must include a 1-line evidence note, not just a label and color.
+
+**Lang cards** — the source attribution is mandatory. Every `.lang-card` must show where the quote came from (platform + date), not just the quote text.
+
+---
+
 ## Throughout
 
 - Lead with the positioning opportunity, not category background.
+- **Inline source attribution is mandatory.** Every competitive claim with a specific fact — competitor launch date, market share figure, user survey stat — must be followed by `(Source Name, Year)`. Claims without attribution are removed or flagged `[LOW CONFIDENCE]`. Overclaiming without evidence is worse than saying less.
 - Write findings as usable input for whoever drafts the actual copy — specific phrases and angles, not positioning theory.
 - Distinguish clearly between "what the evidence supports claiming" and "what would merely be nice to say." Overclaiming externally carries real reputational risk.
 - If the evidence suggests a competitor already owns this exact claim credibly, say so directly. Do not force an angle that isn't available.

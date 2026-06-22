@@ -180,7 +180,7 @@ Build the report in this order:
 - `.cover-title`: The central question this report answers for this specific person at this specific moment. Frame it honestly — not a headline, but the actual question: "Can a 6-Year PM Analyst Make the Case for a Senior PM Role at Stripe in This Market?"
 - `.cover-subtitle`: Scope — what four agents investigated, and for which moment.
 - `.cover-pills`: 5–7 tags: company name, role level, moment type, industry, year, any specific context (geography, stage)
-- `.cover-bottom`: Report Date / Moment Type / Sources Consulted / Candidate Background (brief summary)
+- `.cover-bottom`: Exactly 4 metadata items: (1) Report Date, (2) Moment Type, (3) Sources Consulted, (4) Investigation Depth. Do not add the candidate's name or any personal identifier.
 
 ### 2. Table of Contents
 
@@ -197,13 +197,15 @@ Follow with a 4-cell `.stat-strip` (e.g., company headcount, competitive bar ind
 
 ### 4. Research Sections (one per agent)
 
-**Company + Role Agent** — What the company actually does, why this role exists right now (not the job posting version), what the team structure looks like, recent company moves that bear on the role. Include a `.hire-grid` or `.chart-block` showing company signals.
+**Visual-first rule**: Every research section must include at least one visual component. In priority order: `.bar-chart`, `.hire-grid`, `.tl`. Text tables are last resort only — never substitute a text table where a bar chart communicates the same finding faster.
 
-**Competitor-of-Candidate Agent** — The realistic competitive bar for this exact role at this exact company stage. Use a `.bar-chart` or `.comp-table` comparing the candidate's profile against what the evidence suggests the competitive pool looks like.
+**Company + Role Agent** — What the company actually does, why this role exists right now (not the job posting version), what the team structure looks like, recent company moves that bear on the role. Use a `.hire-grid` for company signals (Growth Trajectory / Product Stage / Hiring Velocity / Funding Signal / Public Reputation / Role Clarity) — every cell needs a 1-line evidence note.
 
-**Culture Signal Agent** — What current and former employees say, glassdoor and blind patterns, what the interviewer/hiring manager cares about based on their public profile and writing. Use `.contra` boxes for any culture red flags or contradictions.
+**Competitor-of-Candidate Agent** — The realistic competitive bar for this exact role at this exact company stage. Use a `.bar-chart` comparing the candidate's profile against what the evidence suggests the competitive pool looks like — label bars by dimension (Years Experience / Domain Depth / Technical Level / Visibility / Education) not by person names. State explicitly what separates top-quartile candidates from median ones.
 
-**Compensation Agent** — A specific, evidence-based pay range for this role at this company stage. Present as a `.chart-block` with a bar showing the range (low / midpoint / top) with reasoning for each.
+**Culture Signal Agent** — What current and former employees say, Glassdoor and Blind patterns, what the interviewer/hiring manager cares about based on their public profile and writing. Use `.contra` boxes for culture red flags or contradictions between stated values and observed behavior.
+
+**Compensation Agent** — A specific, evidence-based pay range for this role at this company stage. Present as a `.chart-block` with a `.bar-chart` showing the range (floor / midpoint / ceiling) with specific reasoning per band — not a range without explanation.
 
 ### 5. Moment-Type Output
 
@@ -313,26 +315,63 @@ This is the document shaped by the MOMENT TYPE the Strategist identified.
   each of the six agents, in six sentences. One sentence each. No padding.
   This is the candidate's cheat sheet before they read the full document.
 
-### 6. Synthesis
+### 6. Risk Flags — What the Candidate Must Know
+
+This section immediately follows the Moment-Type Output. It appears before Synthesis.
+
+Produce 3–5 `.contra` boxes labelled "RISK [N] — [SHORT NAME]". Each must:
+- Name the specific risk to the candidate's chances or decision at this moment
+- State what evidence supports this risk (not hedging — a specific signal)
+- State what would have to be true for this risk to not matter
+- State whether the candidate can do anything about it before the moment
+
+Do not write generic risks. "Company may not like your background" is not a risk flag. "Three of the last five people hired for this exact role came from [Company X] according to LinkedIn data — the hiring manager may have a pattern preference the candidate cannot overcome with preparation alone" is a risk flag.
+
+Skip this section only for STORY_BUILD — stories don't have risk flags, they have gap analysis (already built into that output).
+
+### 7. Synthesis
 
 2–3 `.contra` boxes for contradictions (job posting vs. what culture signals say, comp range vs. what employees report, stated growth stage vs. actual trajectory).
 
 2–3 `.pattern-card` blocks for non-obvious patterns — what becomes visible only by connecting multiple agents' findings.
 
-### 7. Citations
+### 8. Citations
 
 List every source actually consulted. Do not invent sources.
 
-### 8. Footer
+### 9. Footer
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Date + disclaimer that all research reflects web sources at time of generation, compensation ranges are estimates. Do not include the candidate's name or any personal name.
 
 ---
 
+## Component Rules
+
+**Bar charts** — the widest bar is always 100%. Use `.bf-brand` for the candidate's profile or the target role, `.bf-green` for top-quartile benchmark, `.bf-muted` for median, `.bf-danger` for a gap or risk. Never use "Candidate" as a bar label — use the dimension being measured.
+
+Bar chart skeleton (for competitive bar and comp range sections):
+```html
+<div class="chart-block">
+  <div class="chart-label">COMPETITIVE BAR — [ROLE] AT [COMPANY]</div>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-lbl">Top Quartile</div><div class="bar-track"><div class="bar-fill bf-green" style="width:100%">8+ yrs, PM at FAANG</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Median Pool</div><div class="bar-track"><div class="bar-fill bf-muted" style="width:65%">5–7 yrs, Series B</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Floor</div><div class="bar-track"><div class="bar-fill bf-warm" style="width:40%">3–4 yrs, associate PM</div></div></div>
+  </div>
+</div>
+```
+
+**Hire grid** — use `.hc-green` for confirmed strong signals, `.hc-hot` for urgent/caution signals, `.hc-warm` for positive but unconfirmed, `.hc-cold` for neutral, `.hc-miss` for red flags. Every cell must have a 1-line evidence note.
+
+**Pattern cards** — `.pattern-agents` footer must name which specific agents produced each non-obvious connection.
+
+---
+
 ## Throughout
 
 - Lead every section with the answer, not company background.
+- **Inline source attribution is mandatory.** Every claim with a specific number — compensation figure, headcount, funding round amount, interview acceptance rate — must be followed by `(Source Name, Year)`. Numbers without attribution are removed or flagged `[LOW CONFIDENCE — estimate only]`. Compensation ranges stated without a source undermine trust in the whole document.
 - Never pad. A sharp 800-word output beats a padded 3000-word one.
 - State findings as fact with attribution. Hedge explicitly only for genuinely uncertain findings.
 - Never fabricate specificity. If a detail was not found in research, do not include it.

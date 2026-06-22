@@ -191,11 +191,13 @@ Then a `.stat-strip` of 4 numbers that make the urgency concrete (user signal co
 
 ### 4. Research Sections
 
-**User Signal** — Real user pain and requests. Use verbatim language where possible. Bar chart or hire grid showing signal strength by segment. Do not interpret: show what users actually said.
+**Visual-first rule**: Every research section must include at least one visual component. In priority order: `.bar-chart` for comparisons, `.hire-grid` for categorical signals, `.tl` for timelines. Text tables are last resort only — never substitute a text table where a bar chart communicates the same finding.
 
-**Competitor Feature** — What competitors have shipped or are building. Timeline of competitive moves. Bar chart of capability gaps. State explicitly whether a competitor already owns this space or whether there is still room to differentiate.
+**User Signal** — Real user pain and requests. Use verbatim language where possible. Use a `.hire-grid` or `.bar-chart` showing signal strength by segment (High Pain / Moderate / Low / Unknown). Do not interpret: show what users actually said.
 
-**Market Timing** — Is the company early, on-time, or late to this problem? What does the evidence say about timing risk? A `.hire-grid` works well here (Early / Right Time / Late / Behind / Competitor Shipped / Category Saturated).
+**Competitor Feature** — What competitors have shipped or are building. Use a `.bar-chart` for capability gaps — name each competitor explicitly on the bars, never as "Competitor A." Use a `.tl` for timeline of competitive moves. State explicitly whether a competitor already owns this space or whether there is still room to differentiate. Named competitors with specific feature dates carry more weight than generic "major players."
+
+**Market Timing** — Is the company early, on-time, or late to this problem? Use a `.hire-grid` (Early / Right Time / Late / Behind / Competitor Shipped / Category Saturated). Every cell must have a specific evidence note, not just a color.
 
 **Stakeholder Context (Internal half)** — What this specific internal audience cares about most. What objections they are likely to raise. What evidence format they weight most heavily. This section should help the PM tailor the rest of the document to the actual reader.
 
@@ -216,28 +218,68 @@ This is the core of the document. Structure it in this order:
 
 **The Ask, Restated** — Close exactly where you opened, now backed by the evidence. Restate the specific decision or resource being requested.
 
-### 6. Open Questions
+### 6. Risk Flags — What Could Go Wrong
+
+This section immediately follows The Internal Argument. It appears before Open Questions.
+
+Produce 3–5 `.contra` boxes labelled "RISK [N] — [SHORT NAME]". Each must:
+- Name the specific way this recommendation or roadmap direction could fail or be rejected
+- State what evidence supports or undercuts this risk (not generic hedging)
+- State what condition would trigger this risk (e.g., "if competitor ships X before Q3")
+- State whether the recommendation already mitigates it, and how
+
+Do not write generic risks. "Users may not adopt it" is not a risk flag. "Amplitude's August 2025 session replay release captures 70% of the stated use case — if they ship funnel analysis in H1 2026, the differentiation argument collapses before roadmap approval" is a risk flag.
+
+### 7. Open Questions
 
 Be explicit about what remains uncertain. A document honest about its limits is more credible to internal audiences than one that overclaims. Use a bulleted list inside a `.report-section`.
 
-### 7. Synthesis
+### 8. Synthesis
 
 2 `.contra` boxes for genuine tensions in the evidence (user demand vs. market timing, competitive urgency vs. internal capacity, etc.).
 
-### 8. Citations
+2–3 `.pattern-card` blocks for non-obvious patterns — what becomes visible only when findings from multiple agents are connected. Each must reference which agents produced the signal.
+
+### 9. Citations
 
 List every source actually consulted. Do not invent sources.
 
-### 9. Footer
+### 10. Footer
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Date + "Prepared for internal use" + disclaimer on research basis. Do not include the name of the person who ran the brief.
 
 ---
 
+## Component Rules
+
+**Bar charts** — the widest bar is always 100%. Scale all others proportionally. Use `.bf-brand` for the subject product, `.bf-danger` for the most threatening competitor, `.bf-warm` for middle, `.bf-muted` for neutral, `.bf-green` for best-in-class benchmark.
+
+Bar chart skeleton (copy and populate — name competitors explicitly):
+```html
+<div class="chart-block">
+  <div class="chart-label">FEATURE CAPABILITY COMPARISON</div>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-lbl">Our Product</div><div class="bar-track"><div class="bar-fill bf-brand" style="width:75%">75</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor A</div><div class="bar-track"><div class="bar-fill bf-danger" style="width:90%">90</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor B</div><div class="bar-track"><div class="bar-fill bf-warm" style="width:55%">55</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Category Avg</div><div class="bar-track"><div class="bar-fill bf-muted" style="width:40%">40</div></div></div>
+  </div>
+</div>
+```
+
+**Hire grid** — use `.hc-hot` (amber) for urgent/critical signals, `.hc-warm` for positive, `.hc-cold` for neutral, `.hc-miss` for gaps or risks, `.hc-green` for confirmed strengths.
+
+**Timeline** — use `.tl-year` for date/quarter label, `.tl-amt` for the event headline, `.tl-desc` for one-line context.
+
+**Pattern cards** — `.pattern-agents` footer must name which specific agents produced each signal — this is what distinguishes multi-agent analysis from a single search.
+
+---
+
 ## Throughout
 
 - Lead with the ask, not the background. The reader knows the product.
+- **Inline source attribution is mandatory.** Every claim with a specific number — competitor launch date, market size, user survey stat, growth rate, churn figure — must be followed by a parenthetical attribution: `(Source Name, Year)`. Numbers without attribution must be removed or flagged as `[LOW CONFIDENCE — unverified]`. Internal audiences lose trust in documents that assert statistics without sourcing.
 - Match tone to the stakeholder: sharper and more numbers-forward for execs and board; more function-specific for cross-functional peers.
 - Never pad. Internal documents compete for attention with everything else on the stakeholder's desk.
 - If the evidence genuinely doesn't support the proposed direction, say so. Protecting credibility now is worth more than winning a bad argument.
