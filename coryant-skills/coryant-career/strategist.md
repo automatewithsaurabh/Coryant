@@ -30,7 +30,17 @@ MOMENT TYPE
   NEGOTIATION — user has an offer or is approaching one, needs
     leverage and benchmark data
   DECISION — user is deciding whether to pursue this at all
-  Each moment type shifts emphasis in the final synthesis.
+  RESUME_TAILOR — user wants resume bullets, positioning
+    statement, cover letter, and ATS keywords tailored to a
+    specific JD
+  STORY_BUILD — user wants to structure, evaluate, and map
+    their professional stories to likely interview questions
+    before a real conversation
+  FULL_PREP — user wants the complete package: research,
+    materials, stories, and a negotiation baseline — treat as
+    all moment types combined, running all relevant agents
+  Each moment type shifts which agents run and what the final
+  output emphasises.
 
 STAGE OF COMPANY
   Pre-seed/seed, Series A/B, growth stage, public, or
@@ -58,9 +68,11 @@ WHAT WOULD ACTUALLY HELP
 
 ## Mandate Building
 
-You have four agents available. For each brief, decide if all
-four are relevant (usually yes) and build a specific mandate
-for each:
+Six agents are available. Select based on moment type — not all
+six always run. Write 2–4 specific search queries per active
+research agent. For execution agents, specify inputs instead.
+
+RESEARCH AGENTS
 
 1. Company + Role Agent
    Mandate covers: what the company actually does (not the
@@ -69,35 +81,68 @@ for each:
    likely looks like to the hiring manager, recent company
    moves (funding, pivots, leadership changes) that bear on
    why this role exists right now.
+   Run for: ALL moment types. Always run first.
 
 2. Competitor-of-Candidate Agent
    Mandate covers: who else is likely applying or already in
    similar roles at comparable companies, what the realistic
    competitive bar looks like, what differentiates a standout
    candidate in this specific market from an average one.
+   Run for: APPLICATION, INTERVIEW_PREP, DECISION, RESUME_TAILOR,
+   FULL_PREP. Skip for NEGOTIATION (bar is already cleared).
 
 3. Culture Signal Agent
    Mandate covers: what current and former employees say about
    working there, leadership communication style and public
-   presence, what the company's actual (not stated) values
-   appear to be based on behavior, any public friction points
-   worth being aware of.
+   presence, what the company's actual values appear to be
+   based on behavior, any public friction points.
+   If interviewer is named — profile them specifically.
+   Run for: INTERVIEW_PREP, DECISION, APPLICATION (tone fit),
+   FULL_PREP. Optional for NEGOTIATION (cultural fit with
+   offer decision).
 
 4. Compensation Agent
    Mandate covers: realistic compensation range for this role,
    level, and stage of company, equity norms if applicable,
-   how this compares to market alternatives the user could
-   reasonably pursue instead.
+   how this compares to market alternatives.
+   Run for: NEGOTIATION, DECISION, FULL_PREP. Include in
+   INTERVIEW_PREP if the brief mentions comp coming up.
 
-Write 2-4 specific search queries per agent. Make them sharp —
-"company name funding" is weak; "company name Series B 2025
-investor names valuation" is usable.
+EXECUTION AGENTS
+
+5. Storybank Agent
+   Takes candidate's background or provided stories and
+   produces: STAR+Reflection structures, five-dimension
+   evaluation scores, story-to-question fit mapping, earned
+   secrets for top stories, and gap analysis.
+   Run for: STORY_BUILD, INTERVIEW_PREP (when stories provided),
+   FULL_PREP.
+   Depends on: Company+Role Agent findings for relevance
+   scoring. Note role requirements when briefing this agent.
+
+6. Application Materials Agent
+   Produces: JD decoding + ATS keywords, resume bullet
+   rewrites, resume positioning statement, cover letter (full
+   text), LinkedIn outreach message, screening question answers.
+   Run for: RESUME_TAILOR, APPLICATION, FULL_PREP.
+   Depends on: Company+Role Agent (to decode implicit
+   requirements) and Competitor-of-Candidate Agent (to set
+   differentiation angle). Must run after both.
+
+MOMENT TYPE → AGENT SELECTION GUIDE
+
+  APPLICATION: Company+Role + Competitor + Culture + Application Materials
+  INTERVIEW_PREP: Company+Role + Competitor + Culture + Storybank
+  NEGOTIATION: Company+Role + Compensation + Culture (optional)
+  DECISION: Company+Role + Competitor + Culture + Compensation
+  RESUME_TAILOR: Company+Role + Competitor + Application Materials
+  STORY_BUILD: Company+Role + Storybank
+  FULL_PREP: All six agents
 
 ## Coordinator Instructions to Pass Forward
 
 Tell the Coordinator specifically what kind of cross-agent
-pattern would be most valuable for this brief. Examples of the
-shape to look for:
+pattern would be most valuable for this brief:
 - A gap between what the company says publicly and what hiring
   signals (job postings, team structure) suggest they actually
   need
@@ -105,10 +150,28 @@ shape to look for:
   signals reveal
 - A compensation/responsibility mismatch that the user should
   be aware of before negotiating
+- For RESUME_TAILOR: does the competitive bar from Competitor
+  Agent suggest the candidate needs to reframe seniority or
+  specialisation in their materials?
+- For STORY_BUILD: which story gaps (from Storybank Agent)
+  are genuinely dangerous given what this role requires —
+  rank them by how likely they are to come up in interview
+- For FULL_PREP: what is the single most important insight
+  across all six agents that the candidate must not miss?
 
 ## Synthesizer Instructions to Pass Forward
 
 State plainly what the final document needs to accomplish for
-this specific moment type (application material vs. interview
-prep vs. negotiation prep vs. go/no-go decision support), so
-the Synthesizer and Mode skill shape the output correctly.
+this specific moment type, so the Mode file shapes output
+correctly:
+  APPLICATION → research + tailored application angle
+  INTERVIEW_PREP → research + story-ready prep brief
+  NEGOTIATION → research + leverage + specific scripts
+  DECISION → research + honest go/no-go read
+  RESUME_TAILOR → Application Materials Agent output is the
+    primary deliverable; research is supporting context
+  STORY_BUILD → Storybank Agent output is the primary
+    deliverable; role intelligence is supporting context
+  FULL_PREP → all outputs combined in one document; lead with
+    the executive summary then present each agent's output
+    in logical application-→-prep-→-negotiation order

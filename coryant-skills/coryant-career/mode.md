@@ -228,6 +228,80 @@ This is the document shaped by the MOMENT TYPE the Strategist identified.
 - A `.chart-block` or `.hire-grid` showing the signal-to-noise breakdown (company signals, culture signals, comp signals, role ambiguity)
 - A direct, honest closing read — not hedged — on whether the evidence supports pursuing this
 
+**RESUME_TAILOR** — The Application Materials Agent output is the primary deliverable. Structure as:
+
+  Section 1 — JD DECODING (`.exec-box`)
+  Explicit vs. implicit requirements. Tier 1/2/3 ATS keywords in a `.chart-block`
+  table. What the role actually needs versus what the JD says.
+
+  Section 2 — RESUME POSITIONING STATEMENT
+  The ready-to-use 2–3 sentence summary block in a `.pattern-card` with a
+  `.pattern-head` label of "POSITIONING STATEMENT — READY TO USE". Below it,
+  one-sentence explanation of why this framing works for this specific role.
+
+  Section 3 — BULLET REWRITES
+  Present each bullet rewrite in a `.comp-table` with columns: Original / Rewritten /
+  Why It's Stronger. No padding. Every rewrite must be specific.
+
+  Section 4 — COVER LETTER
+  Full cover letter text in a `.pattern-card`. The `.pattern-head` label:
+  "COVER LETTER — FULL TEXT". Body in monospace-style formatting inside
+  `.pattern-body` so it's copyable. Below: 2–3 sentence note on tone and what
+  to adjust if applying to multiple similar roles.
+
+  Section 5 — LINKEDIN OUTREACH
+  Connection request and follow-up message (if target identified) in `.q-card`
+  blocks with WHY and HOW labels.
+
+  Section 6 — WHAT'S MISSING
+  Explicit list of what could not be completed and why (metrics not provided,
+  stories not given, etc.) so the candidate knows exactly what to fill in.
+
+  Append a condensed research appendix (1 paragraph from Company+Role Agent,
+  1 paragraph on competitive bar) as supporting context, not the main output.
+
+**STORY_BUILD** — The Storybank Agent output is the primary deliverable. Structure as:
+
+  Section 1 — STORY INVENTORY (`.exec-box`)
+  Summary: how many stories were evaluated, tier distribution (Lead / Strong /
+  Needs Work / Drop), and the single most important gap to address before
+  the interview.
+
+  Section 2 — STORY EVALUATIONS
+  One `.pattern-card` per story:
+  - `.pattern-head`: story title (a short label, not the full story)
+  - `.pattern-body`: STAR+Reflection structure in labeled blocks
+  - Five-dimension scores in a `.hire-grid` (5 cells: Substance / Structure /
+    Relevance / Credibility / Differentiation — use `.hc-green` for 4–5,
+    `.hc-warm` for 3, `.hc-miss` for 1–2)
+  - Total score, tier label, and improvement instruction (if below 14)
+  - Earned secret (for Lead-tier stories)
+
+  Section 3 — STORY-TO-QUESTION MAP
+  A `.chart-block` table: Question Type / Best Story / Backup Story / Gap?
+  Flag any question type with no strong story in `.contra` boxes.
+
+  Section 4 — GAP ANALYSIS
+  One `.contra` box per uncovered question type: what type is missing, why it
+  matters for this role, and what to do about it.
+
+  Append a condensed role intelligence section (what this role actually
+  evaluates for) as context for why the evaluations are weighted as they are.
+
+**FULL_PREP** — All moment types combined in one document. Structure as:
+
+  Cover page label: "CAREER INTELLIGENCE — FULL PREP PACKAGE"
+  TOC with groups: Research Intelligence / Application Materials /
+    Story Preparation / Interview Prep / Negotiation Baseline
+
+  Run RESUME_TAILOR sections first, then APPLICATION sections,
+  then STORY_BUILD sections, then INTERVIEW_PREP sections,
+  then NEGOTIATION sections — in that order.
+
+  Executive Summary (`.exec-box`): The single most important insight from
+  each of the six agents, in six sentences. One sentence each. No padding.
+  This is the candidate's cheat sheet before they read the full document.
+
 ### 6. Synthesis
 
 2–3 `.contra` boxes for contradictions (job posting vs. what culture signals say, comp range vs. what employees report, stated growth stage vs. actual trajectory).
