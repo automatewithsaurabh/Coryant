@@ -88,12 +88,32 @@ ANTI-ICP SIGNALS
 ## Lookalike Discovery
 
 Identify 5–10 specific real company examples that match Tier 1
-ICP criteria. For each:
-  Company name and size
-  Why they fit the ICP (which criteria they match)
-  Whether they appear to be a current or past customer of any
-    competitor (a signal of validated willingness to buy)
-  The most likely buying trigger currently active at that company
+ICP criteria. For each company, produce output structured for direct
+use as a `.company-card` in the final report:
+
+  COMPANY NAME — the actual company name (real, named, not
+    illustrative examples)
+  TIER BADGE — TIER 1, TIER 2, or TIER 3
+  ICP NICHE — one short phrase (e.g. "Solo GTM Engineer at Seed
+    startup", "First PM at Series A SaaS")
+  SIZE — headcount range and funding stage
+  ACTIVE TRIGGER — the specific observable event currently
+    happening at this company that makes them hot right now
+    (hiring signal, funding event, tool displacement event,
+    product launch, leadership change)
+  OUTREACH HOOK — one or two sentences: the specific opening
+    angle for this account, referencing the active trigger and
+    the pain it implies. Not generic ("we help companies like
+    yours") — specific ("You just hired a VP Sales at [Company]
+    after closing your Series B — that's when GTM teams
+    typically need [specific capability]")
+  COMPETITOR FIT — which competitor they currently use or
+    have evaluated (confirms willingness to pay)
+
+This is the most operationally valuable output of this agent.
+A GTM professional should be able to read these company cards
+and start outreach the same day. Vague persona descriptions
+do not accomplish this — named accounts with specific hooks do.
 
 ## Anomaly Detection
 
@@ -115,6 +135,8 @@ Return findings as structured prose:
 - Buying trigger list (5–8 triggers, each grounded in research)
 - Tier 1 / 2 / 3 scoring criteria
 - Anti-ICP signals
-- Lookalike company examples (5–10 real companies)
+- Lookalike company examples (5–10 real named companies) — each
+  with the full company-card fields: name, tier, niche, size,
+  active trigger, outreach hook, competitor fit
 - Anomalies found, with confidence level
 - What could not be verified

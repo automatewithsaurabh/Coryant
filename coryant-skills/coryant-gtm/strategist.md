@@ -158,6 +158,22 @@ State plainly what decision this document needs to support, so
 the final output leads with the answer to that decision rather
 than a general market overview.
 
+**Document structure instruction:** Tell the Synthesizer that
+Risk Flags / Failure Modes must appear as Section 6 in the
+final report — immediately after the Decision-Type Output
+section, before the Synthesis section. The failure modes must
+be specific to the recommendation just made, not generic. Each
+`.contra` box must name a specific failure mode, the condition
+that would trigger it, and whether the recommendation already
+mitigates it.
+
+**Source attribution instruction:** Tell the Synthesizer that
+every specific number in the final report (market size, growth
+rate, competitor pricing, platform stats, user counts) must be
+followed by a parenthetical source attribution: `(Source, Year)`.
+Numbers without attribution must be removed or flagged as
+`[LOW CONFIDENCE]`.
+
 For OUTREACH decision type: the final output is not a report
 but a ready-to-deploy sequence set. The Synthesizer passes
 the consolidated findings (ICP tier, active signals, customer

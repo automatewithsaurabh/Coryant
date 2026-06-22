@@ -238,11 +238,15 @@ Follow with a `.stat-strip` of 4 key numbers from the research.
 For each agent that ran, produce a `.report-section` with:
 - A numbered section head
 - 2–3 substantial paragraphs of grounded findings
-- At least one `.chart-block` with either:
-  - A `.bar-chart` for comparisons (market size, competitor capabilities, costs)
-  - A `.hire-grid` for categorical signals (6 cells, colored hot/warm/cold/miss/green)
-  - A `.tl` (timeline) for funding or chronological events
-  - A data table for structured comparisons
+- At least one `.chart-block` using a visual component — in priority order:
+  - A `.bar-chart` for comparisons (market size, competitor capabilities, costs, pricing)
+  - A `.hire-grid` for categorical signals (use 6 cells, colored hot/warm/cold/miss/green)
+  - A `.tl` (timeline) for funding rounds, product launches, or competitor moves
+  - A data table **only** as last resort when no visual component fits the data
+
+**Visual-first rule**: Never default to a text paragraph where a `.bar-chart` or `.hire-grid` would communicate the same finding faster. Capability comparisons, cost comparisons, market sizing, and signal scoring always become visual components.
+
+**Distribution agent section** — when the Distribution Agent ran, its section must include a "NAMED OUTREACH TARGETS" sub-section. For each channel type where a specific creator, publication, or community is identified, produce one `.company-card` per target (5–8 total). Fields: Name/Channel, Audience Size, Why It Fits, Outreach Hook. Use `.company-badge` to label the channel type (YOUTUBE / NEWSLETTER / COMMUNITY / PODCAST).
 
 ### 5. Decision-Type Output Section
 
@@ -321,17 +325,29 @@ Structure the HTML document differently for this mode:
   Skip: Table of Contents, Synthesis section, and Contradictions for OUTREACH mode.
   The footer and cover page still apply.
 
-### 6. Synthesis Section
+### 6. Risk Flags — Failure Modes Checked
+
+This section immediately follows the Decision-Type Output. It must appear before Synthesis.
+
+Produce 4–6 `.contra` boxes labelled "FAILURE MODE [N] — [SHORT NAME]". Each box must:
+- Name the specific way this strategy or recommendation could fail
+- State what evidence supports or contradicts this risk (not generic hedging)
+- State what condition would need to be true for this risk to materialise
+- State the mitigation already built into the recommendation, or note if there is none
+
+Do not write generic risks. "Market may not exist" is not a failure mode. "YouTube outreach fails to generate a creator-driven traffic spike because the first-run experience requires CLI setup that creators won't do on camera" is a failure mode. Be specific.
+
+### 7. Synthesis Section
 
 Always include:
 - 2–3 `.contra` boxes labelled "CONTRADICTION [N]" — genuine tensions between what different agents found (market data vs. consumer reality, platform policy vs. brand behavior, etc.)
 - 3–4 `.pattern-card` blocks for non-obvious patterns — things that only become visible when you connect findings across agents. Each pattern must reference which agents produced the signal.
 
-### 7. Citation Strip (`.cites`)
+### 8. Citation Strip (`.cites`)
 
 List every source actually consulted. Do not invent sources.
 
-### 8. Footer (`.report-footer`)
+### 9. Footer (`.report-footer`)
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Standard disclaimer — when the report was produced, that it is based on web research at the time of generation, that figures are in [currency from brief] unless stated. Do not include the name of the person who ran the brief.
@@ -342,20 +358,92 @@ Right: Standard disclaimer — when the report was produced, that it is based on
 
 **Bar charts** — the widest bar is always 100%. Scale all others proportionally. Choose `.bf-brand` for the subject company/option, `.bf-danger` for the worst option, `.bf-warm` for middle, `.bf-muted` for neutral, `.bf-green` for the best benchmark.
 
+Bar chart skeleton (copy and populate — do not use a text table instead):
+```html
+<div class="chart-block">
+  <div class="chart-label">CAPABILITY COMPARISON — [CATEGORY]</div>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-lbl">Subject Co.</div><div class="bar-track"><div class="bar-fill bf-brand" style="width:85%">85</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor A</div><div class="bar-track"><div class="bar-fill bf-muted" style="width:60%">60</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor B</div><div class="bar-track"><div class="bar-fill bf-warm" style="width:45%">45</div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Competitor C</div><div class="bar-track"><div class="bar-fill bf-danger" style="width:30%">30</div></div></div>
+  </div>
+</div>
+```
+
 **Hire grid** — use `.hc-hot` (amber) for urgent signals, `.hc-warm` (brand tint) for positive signals, `.hc-cold` (slate) for neutral, `.hc-miss` (red) for gaps or risks, `.hc-green` for confirmed positives.
 
 **Timeline** — use `.tl-year` for the date label, `.tl-amt` for the headline number or event name, `.tl-desc` for one-line context.
 
 **Company cards** — `.company-hook` must contain a specific, research-grounded outreach message or strategic observation — not generic advice.
 
+Company card skeleton (copy and populate — one per Tier 1 target):
+```html
+<div class="company-card">
+  <div class="company-head">
+    <div>
+      <div class="company-name">Company Name</div>
+      <div class="company-niche">ICP vertical / niche</div>
+    </div>
+    <div class="company-badge">TIER 1</div>
+  </div>
+  <div class="company-body">
+    <div class="company-row">
+      <div class="company-field"><label>Size</label><span>50–200 employees, Series B</span></div>
+      <div class="company-field"><label>Active Trigger</label><span>Hired VP Sales Q1 2026</span></div>
+    </div>
+    <div class="company-hook">
+      <label>Outreach Hook</label>
+      <p>Specific opening line referencing the active trigger and the pain it implies — not generic.</p>
+    </div>
+  </div>
+</div>
+```
+
 **Phase cards** — `.phase-metric` at the bottom of each phase must state what is NOT achievable in that window, not just what is.
+
+Phase card skeleton (use for all 3 phases — change `.phase-head-1/2/3` per phase):
+```html
+<div class="phase-card">
+  <div class="phase-head phase-head-1">
+    <div class="phase-num">01</div>
+    <div class="phase-meta">
+      <h3>Days 1–30 — [Phase Name]</h3>
+      <p>Primary goal this phase must accomplish</p>
+    </div>
+  </div>
+  <div class="phase-body">
+    <p>What happens in this window, grounded in research findings.</p>
+    <div class="phase-tasks">
+      <div class="phase-task phase-task-2"><label>Must Do</label><span>Specific action #1</span></div>
+      <div class="phase-task phase-task-2"><label>Must Do</label><span>Specific action #2</span></div>
+      <div class="phase-task phase-task-3"><label>Target</label><span>Measurable outcome</span></div>
+      <div class="phase-task phase-task-1"><label>Avoid</label><span>What not to spend time on</span></div>
+    </div>
+    <div class="phase-metric"><label>NOT Achievable This Phase</label><p>What cannot realistically happen yet — be specific.</p></div>
+  </div>
+</div>
+```
+
+**ARR path** — use `.arr-path` as a visual milestone strip, not a table. Always 4 nodes for the key milestones. Each node needs a revenue value, time label, and one-line context.
+
+ARR path skeleton:
+```html
+<div class="arr-path">
+  <div class="arr-node"><div class="arr-val">$1.2K</div><div class="arr-time">Month 3</div><div class="arr-desc">45 paying users</div></div>
+  <div class="arr-node"><div class="arr-val">$8.4K</div><div class="arr-time">Month 6</div><div class="arr-desc">300 paying users</div></div>
+  <div class="arr-node"><div class="arr-val">$34K</div><div class="arr-time">Month 9</div><div class="arr-desc">1,100 paying users</div></div>
+  <div class="arr-node"><div class="arr-val">$83K+</div><div class="arr-time">Month 13–15</div><div class="arr-desc">$1M ARR crossed</div></div>
+</div>
+```
 
 ---
 
 ## Throughout
 
 - Lead every section with the answer, not a market overview.
-- State findings as fact with attribution. Use hedged language only for genuinely low-confidence findings, and label them explicitly.
+- **Inline source attribution is mandatory.** Every claim with a specific number — market size, growth rate, competitor price, platform stat, user count — must be followed by a parenthetical attribution: `(Source Name, Year)`. If a number cannot be attributed to a named source, do not include it. "Research suggests" is not attribution.
+- State findings as fact with attribution. Use hedged language only for genuinely low-confidence findings, and label them explicitly: `[LOW CONFIDENCE — single source]`.
 - Never fabricate specificity. If a data point was not found in research, do not include it.
 - Non-obvious patterns get prominent placement — these justify the investigation.
 - Close with a direct recommendation. "It depends" is only acceptable if you name what it depends on and give your best read anyway.
