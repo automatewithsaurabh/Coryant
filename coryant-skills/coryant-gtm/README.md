@@ -1,8 +1,9 @@
 # Coryant GTM Pack
 
-Six coordinated research agents that map a market from six angles — size,
-competition, capital flow, customer language, regulatory risk, and hiring
-signal — then shape findings into a decision-ready output.
+Nine coordinated agents that map a market from every angle — size,
+competition, capital flow, customer language, regulatory risk, hiring
+signal, ICP scoring, buying signals, and outreach sequences — then
+shape findings into a decision-ready output or ready-to-deploy campaigns.
 
 ---
 
@@ -20,11 +21,15 @@ coryant-gtm/
     ├── funding.md             ← where capital is moving and why
     ├── consumer.md            ← verbatim customer language and pain points
     ├── regulatory.md          ← rules, risk, and upcoming changes
-    └── hiring.md              ← strategic signal from job postings
+    ├── hiring.md              ← strategic signal from job postings
+    ├── icp.md                 ← ICP definition, account scoring, Tier 1 targets
+    ├── signals.md             ← buying signal detection scored HOT/WARM/WATCH
+    └── sequence.md            ← SPARK outreach sequences ready to deploy
 ```
 
-The Strategist decides which agents are relevant per brief — not all six
+The Strategist decides which agents are relevant per brief — not all nine
 always run. A narrow competitive question may only need two or three agents.
+An OUTREACH brief routes through ICP → Signals → Sequence only.
 
 **Output modes** — tell the pack your decision type:
 
@@ -35,8 +40,11 @@ always run. A narrow competitive question may only need two or three agents.
 | Budget | Where to allocate spend across segments |
 | Whitespace | Underserved gaps competitors haven't claimed |
 | Diagnostic | Why current GTM is or isn't working |
+| ICP Build | Who to target, how to score accounts, Tier 1 target list |
+| Account Research | Deep intelligence on one specific target account |
+| Outreach | Ready-to-send email/LinkedIn sequences anchored to live signals |
 
-**Agents** — up to 6 · **Avg runtime** — 15–25 min (all agents active)
+**Agents** — up to 9 · **Avg runtime** — 15–25 min (intelligence modes) · 10–20 min (OUTREACH mode)
 
 ---
 
@@ -136,6 +144,30 @@ Run Coryant GTM on this brief: Our pipeline conversion has dropped 30% in
 six months. We've ruled out product issues. We want to understand what's
 changed in the competitive landscape, whether our ICP has shifted, and
 whether our current positioning still fits the market.
+```
+
+**ICP Build:**
+```
+Run Coryant GTM on this brief: We sell workflow automation to B2B SaaS
+companies. We want to know who our actual ideal customer is — which
+firmographic profile converts fastest, what buying triggers precede a
+purchase, and which 10 real companies we should be targeting right now.
+```
+
+**Outreach:**
+```
+Run Coryant GTM on this brief: We need cold email sequences for outbound
+into Series B SaaS companies in the US with a new VP of Sales hire in the
+last 60 days. Build ICP criteria, find current HOT signals, and write a
+5-touch SPARK email sequence and a LinkedIn sequence ready to deploy.
+```
+
+**Account Research:**
+```
+Run Coryant GTM on this brief: We have a meeting with Acme Corp next week.
+They're a 200-person SaaS company that just raised a $15M Series B. Give
+us everything — what they're actually building, who the decision maker is,
+what signals are active right now, and how we should walk in.
 ```
 
 ---

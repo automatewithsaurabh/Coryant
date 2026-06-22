@@ -265,6 +265,49 @@ This is the section shaped by the DECISION TYPE the Strategist identified.
 - What competitors are doing differently
 - A direct, specific recommendation for what to change
 
+**ICP_BUILD** — Produce:
+- The ICP definition: firmographic, technographic, and psychographic criteria with evidence
+- Tier 1 / 2 / 3 scoring rubric in a `.chart-block` comparison table
+- Buying trigger list (5–8 triggers) each stated as a concrete observable event
+- Anti-ICP signals — what disqualifies an account
+- Tier 1 target list: 5–10 real named companies using `.company-card`, with the specific
+  trigger currently active at each and the recommended outreach angle
+
+**ACCOUNT_RESEARCH** — Produce:
+- Company overview: actual size, growth trajectory, product focus (not just their website copy)
+- Decision-maker profile: who to reach, what their priorities appear to be based on their
+  public content and company direction
+- Active signals: every HOT or WARM signal currently observable at this account, scored
+  and listed in priority order
+- Competitive context: which competitors this account uses or has evaluated
+- Recommended entry angle: the one hook most likely to resonate given the signals found,
+  stated as a specific opening line or framing
+
+**OUTREACH** — The primary deliverable is sequences, not a report.
+Structure the HTML document differently for this mode:
+
+  Section 1 — OUTREACH BRIEF (replaces Executive Summary)
+  A single `.exec-box` stating: the ICP tier this sequence targets, the primary signal
+  used, the decision-maker role, and the strategic intent of this outreach.
+
+  Section 2 — SEQUENCES (primary content)
+  Present each sequence in a `.pattern-card` block:
+  - `.pattern-head`: sequence type and target role
+  - `.pattern-body`: each touch formatted as a labeled block with Subject / Body / Timing
+  Use monospace code blocks inside `.pattern-body` for the actual email/message text
+  so it's copyable without formatting.
+
+  Section 3 — SIGNAL APPENDIX
+  A `.hire-grid` or `.bar-chart` showing the signals used and their scores.
+  Then the ICP tier criteria that informed targeting.
+
+  Section 4 — RESEARCH APPENDIX
+  Condensed findings from whichever intelligence agents ran. 1–2 paragraphs per agent,
+  not full sections — this is supporting evidence, not the main output.
+
+  Skip: Table of Contents, Synthesis section, and Contradictions for OUTREACH mode.
+  The footer and cover page still apply.
+
 ### 6. Synthesis Section
 
 Always include:
