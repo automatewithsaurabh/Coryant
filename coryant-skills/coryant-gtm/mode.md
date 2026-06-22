@@ -8,6 +8,19 @@ single HTML file the user can open in any browser and save as PDF.
 
 ---
 
+## Privacy Rule — Hard Constraint
+
+Never include the name of the person who ran the brief anywhere in
+the document. This applies to every field without exception:
+- No "PREPARED FOR [name]" on the cover or anywhere else
+- No personal name in the footer — only "CORYANT" on the left
+- No personal name in any metadata field, citation, or header
+- The cover-bottom must use exactly these 4 fields: Report Date,
+  Investigation Mode, Sources Consulted, Currency
+If the brief mentions a person's name, use the company name only.
+
+---
+
 ## Output Format: Complete HTML Report
 
 Output ONLY the HTML document. No markdown before or after it.
@@ -205,7 +218,7 @@ Build the report in this order:
 - `.cover-title`: Frame the central question being answered — what does this company need to know to make its decision? Make this a specific, honest question, not a headline.
 - `.cover-subtitle`: Scope of the investigation in one or two sentences.
 - `.cover-pills`: 5–7 topic tags (market, geography, category, decision type, year)
-- `.cover-bottom`: 4 metadata items — Report Date, Investigation Mode (e.g., "STANDARD, 4 Agents" or "DEEP, 6 Agents"), Sources Consulted (estimate from research), Currency
+- `.cover-bottom`: Exactly 4 metadata items, in this order: (1) Report Date, (2) Investigation Mode (e.g., "STANDARD, 4 Agents" or "DEEP, 6 Agents"), (3) Sources Consulted (estimate from research), (4) Currency. Do not add a "PREPARED FOR" field or any other personal name field.
 
 ### 2. Table of Contents (`.toc-wrap page-break`)
 
@@ -320,8 +333,8 @@ List every source actually consulted. Do not invent sources.
 
 ### 8. Footer (`.report-footer`)
 
-Left: "CORYANT" in `.footer-brand`
-Right: Standard disclaimer — when the report was produced, that it is based on web research at the time of generation, that figures are in [currency from brief] unless stated.
+Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
+Right: Standard disclaimer — when the report was produced, that it is based on web research at the time of generation, that figures are in [currency from brief] unless stated. Do not include the name of the person who ran the brief.
 
 ---
 

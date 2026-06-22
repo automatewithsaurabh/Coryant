@@ -8,6 +8,17 @@ single HTML file the user can open in any browser and save as PDF.
 
 ---
 
+## Privacy Rule — Hard Constraint
+
+Never include the name of the person who ran the brief anywhere in
+the document. This applies to every field without exception:
+- No "PREPARED FOR [name]" on the cover or anywhere else
+- No candidate name in the footer — only "CORYANT" on the left
+- No personal name in any metadata field, citation, or header
+The brief-giver's name must not appear anywhere in the output.
+
+---
+
 ## Output Format: Complete HTML Report
 
 Output ONLY the HTML document. No markdown before or after it.
@@ -314,8 +325,8 @@ List every source actually consulted. Do not invent sources.
 
 ### 8. Footer
 
-Left: "CORYANT" in `.footer-brand`
-Right: Date + disclaimer that all research reflects web sources at time of generation, compensation ranges are estimates.
+Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
+Right: Date + disclaimer that all research reflects web sources at time of generation, compensation ranges are estimates. Do not include the candidate's name or any personal name.
 
 ---
 
