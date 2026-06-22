@@ -162,6 +162,35 @@ body { font-family: 'Georgia','Times New Roman',serif; font-size: 10.5pt; color:
 .toc-title { color: var(--text); }
 .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px; position: relative; top: -3px; }
 .toc-pg { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; color: var(--muted); }
+.memo { border: 2px solid var(--brand); border-radius: 14px; overflow: hidden; margin-bottom: 44px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.memo-head { background: linear-gradient(135deg,var(--brand),#16213E); padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+.memo-head h2 { font-family: 'Helvetica Neue',sans-serif; font-size: 13pt; font-weight: 800; color: white; letter-spacing: 1px; text-transform: uppercase; }
+.memo-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; }
+.memo-verdict.go { background: #D1FAE5; color: var(--high); }
+.memo-verdict.wait { background: #FEF3C7; color: var(--medium); }
+.memo-verdict.no { background: #FEE2E2; color: var(--low); }
+.memo-body { padding: 26px 30px; }
+.memo-rec { font-family: 'Georgia',serif; font-size: 13pt; line-height: 1.5; color: var(--text); font-weight: 600; margin-bottom: 22px; }
+.memo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 22px; }
+.memo-col label { display: block; font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; font-weight: 700; }
+.memo-col ul { list-style: none; }
+.memo-col li { font-size: 9pt; color: var(--text); padding: 5px 0 5px 16px; position: relative; line-height: 1.5; }
+.memo-col li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+.memo-foot { border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-family: 'Helvetica Neue',sans-serif; font-size: 8.5pt; color: var(--muted); }
+.memo-conf { font-weight: 700; color: var(--text); }
+.grade { display: inline-block; font-family: 'Helvetica Neue',sans-serif; font-size: 7pt; font-weight: 800; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; vertical-align: middle; margin-left: 4px; }
+.grade-a { background: #D1FAE5; color: var(--high); }
+.grade-b { background: #FEF3C7; color: var(--medium); }
+.grade-c { background: #FEE2E2; color: var(--low); }
+.stress { background: #F5F3FF; border: 1px solid #DDD6FE; border-left: 4px solid var(--brand); border-radius: 0 10px 10px 0; padding: 22px 26px; margin: 22px 0; }
+.stress h5 { font-family: 'Helvetica Neue',sans-serif; font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; font-weight: 700; }
+.stress-row { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.stress-row:last-child { border-bottom: none; }
+.stress-claim { flex: 1; font-size: 9pt; color: var(--text); line-height: 1.5; }
+.stress-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+.sv-held { background: #D1FAE5; color: var(--high); }
+.sv-weakened { background: #FEF3C7; color: var(--medium); }
+.sv-failed { background: #FEE2E2; color: var(--low); }
 ```
 
 ---
@@ -183,14 +212,24 @@ Build the report in this order:
 
 Groups: Research Intelligence / Positioning Output / Language to Use / Risk Check / Synthesis
 
-### 3. Executive Summary
+### 3. Positioning Verdict (`.memo`) — Lead With It
 
-`.exec-box` with 2–3 paragraphs:
-- Paragraph 1: The sharpest, most ownable positioning claim this product/feature can credibly make in the market right now.
-- Paragraph 2: Why this claim is available — what competitors have said or not said, what the market timing is.
-- Paragraph 3: The honest risk — a claim that could backfire, a competitor who partly owns adjacent territory, or a timing concern.
+Open with a one-page verdict a marketing or comms lead can act on. Build
+it as a `.memo` block:
 
-Follow with `.stat-strip` of 4 numbers (competitor launch date, user pain frequency, market narrative momentum signal, timing window estimate).
+- `.memo-head`: title "POSITIONING VERDICT" + a `.memo-verdict` pill —
+  `go` (CLAIM IT), `wait` (NOT YET / TEST FIRST), or `no` (DON'T — territory taken).
+- `.memo-rec`: the single most ownable positioning claim, written in the
+  voice it could actually be used in, in 1–2 sentences.
+- `.memo-grid`: three `.memo-col` columns:
+  - "WHY IT'S AVAILABLE" — 2–3 evidence points that no competitor owns
+    this, each with a `.grade` badge
+  - "WHAT MAKES IT LAND" — the user-language or timing proof it resonates
+  - "BIGGEST RISK" — the way this claim backfires or reads as derivative
+- `.memo-foot`: left = confidence (`.memo-conf`); right = the test that
+  would validate the claim before full launch.
+
+Then a `.stat-strip` of 4 numbers (competitor launch date, user pain frequency, market narrative momentum signal, timing window estimate). Each `.sub` carries a `.grade` badge.
 
 ### 4. Research Sections
 
@@ -227,15 +266,28 @@ Follow with `.stat-strip` of 4 numbers (competitor launch date, user pain freque
 - State what condition would trigger it
 - Do not write generic risks ("market may not be ready"). Write specific ones ("Figma's March 2026 AI design brief positions around 'instant production assets' — using similar language will read as a copy, not differentiation")
 
-### 6. Open Questions
+### 6. Stress Test (`.stress`) — What We Tried to Disprove
+
+This makes the adversarial review (Orchestrator Stage 3.5) visible. Render
+a `.stress` block titled "WHAT WE TRIED TO DISPROVE" with one `.stress-row`
+per top positioning claim:
+- `.stress-claim`: the claim in one sentence (e.g., "No competitor owns the
+  'instant' framing in this category")
+- `.stress-verdict`: `sv-held` / `sv-weakened` / `sv-failed`
+
+Include 4–6 rows; at least one WEAKENED. A positioning claim marked HELD
+after a genuine attempt to find a competitor already using it is far safer
+to build a launch around. Close with one sentence on what survived.
+
+### 7. Open Questions
 
 What remains genuinely uncertain about how this will land externally. Be specific — these are useful inputs for copy testing decisions, not hedges.
 
-### 7. Citations
+### 8. Citations
 
 List every source actually consulted. Do not invent sources.
 
-### 8. Footer
+### 9. Footer
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Date + "Prepared for external-facing use" + disclaimer that all competitive data reflects web sources at time of generation. Do not include the name of the person who ran the brief.

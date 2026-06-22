@@ -176,14 +176,34 @@ correctly:
     the executive summary then present each agent's output
     in logical application-→-prep-→-negotiation order
 
+**Decision Memo instruction:** Tell the Synthesizer that the
+report must open with a one-page Verdict memo (`.memo`) — a
+staked read on the moment (PURSUE / PROCEED WITH CAUTION /
+RECONSIDER, or readiness for STORY_BUILD/RESUME_TAILOR), the
+sharpest honest read in 1–2 sentences, three columns (Your
+Edge / What Must Go Right / Biggest Risk), and a confidence
+level. The candidate should be able to act on the memo alone.
+
+**Stress Test instruction:** Tell the Synthesizer to carry the
+adversarial review verdicts (Orchestrator Stage 3.5) into a
+visible Stress Test section — the major claims about fit and
+opportunity, each marked HELD / WEAKENED / FAILED, at least
+one WEAKENED. A calibrated candidate beats an overconfident
+one. Skip for STORY_BUILD and RESUME_TAILOR (own scoring layer).
+
+**Evidence grade instruction:** Tell the Synthesizer that every
+load-bearing claim and stat carries an A/B/C evidence grade
+badge (`.grade`), per the Orchestrator's Evidence Grading
+Standard — especially compensation figures.
+
 **Risk Flags instruction:** Tell the Synthesizer that a Risk
-Flags section (3–5 `.contra` boxes) must appear immediately
-after the Moment-Type Output section, before Synthesis. Each
-risk flag must be specific to the candidate's situation and
-this company at this moment — not generic interview advice.
-Skip only for STORY_BUILD (that output has gap analysis
-instead). For FULL_PREP, consolidate risks across all moment
-types into one section near the end.
+Flags section (3–5 `.contra` boxes) appears right after the
+Moment-Type Output, followed by the Stress Test, then Synthesis.
+Each risk flag must be specific to the candidate's situation and
+this company at this moment — not generic interview advice. Skip
+only for STORY_BUILD (that output has gap analysis instead). For
+FULL_PREP, consolidate risks across all moment types into one
+section near the end.
 
 **Source attribution instruction:** Tell the Synthesizer that
 every specific number in the final report — compensation

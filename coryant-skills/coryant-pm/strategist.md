@@ -184,14 +184,32 @@ the output should produce:
     with sections: Problem, Users & Jobs, Competitive Context,
     Timing, Success Metrics, Open Questions
 
+**Decision Memo instruction:** Tell the Synthesizer that the
+report must open with a one-page Decision Memo (`.memo`) — a
+staked verdict (internal: FUND / HOLD / DON'T BUILD; external:
+CLAIM IT / TEST FIRST / DON'T), the ask or claim in 1–2
+sentences, three columns, and an overall confidence level. The
+reader should be able to act on the memo alone.
+
+**Stress Test instruction:** Tell the Synthesizer to carry the
+adversarial review verdicts (Orchestrator Stage 3.5) into a
+visible Stress Test section — the top claims, each marked
+HELD / WEAKENED / FAILED, at least one WEAKENED. This proves
+the conclusions survived a genuine attempt to break them.
+
+**Evidence grade instruction:** Tell the Synthesizer that every
+load-bearing claim and stat carries an A/B/C evidence grade
+badge (`.grade`), per the Orchestrator's Evidence Grading
+Standard. Show a genuine spread, not all-A.
+
 **Risk Flags instruction:** Tell the Synthesizer that a Risk
-Flags section (3–5 `.contra` boxes) must appear immediately
-after the core decision-type output section — before Open
-Questions for internal reports, and as the named Risk Check
-inside the Positioning Output for external reports. Each
-risk flag must be specific to the recommendation, not generic.
-"Competitor may respond" is not a risk flag — name the
-competitor, name the specific move, name the timeline.
+Flags section (3–5 `.contra` boxes) must appear after the
+Stress Test — before Open Questions for internal reports, and
+as the named Risk Check inside the Positioning Output for
+external reports. Each risk flag must be specific to the
+recommendation, not generic. "Competitor may respond" is not a
+risk flag — name the competitor, name the specific move, name
+the timeline.
 
 **Source attribution instruction:** Tell the Synthesizer that
 every specific number in the final report (competitor launch

@@ -165,6 +165,35 @@ body { font-family: 'Georgia','Times New Roman',serif; font-size: 10.5pt; color:
 .toc-title { color: var(--text); }
 .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px; position: relative; top: -3px; }
 .toc-pg { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; color: var(--muted); }
+.memo { border: 2px solid var(--brand); border-radius: 14px; overflow: hidden; margin-bottom: 44px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.memo-head { background: linear-gradient(135deg,var(--brand),#16213E); padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+.memo-head h2 { font-family: 'Helvetica Neue',sans-serif; font-size: 13pt; font-weight: 800; color: white; letter-spacing: 1px; text-transform: uppercase; }
+.memo-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; }
+.memo-verdict.go { background: #D1FAE5; color: var(--high); }
+.memo-verdict.wait { background: #FEF3C7; color: var(--medium); }
+.memo-verdict.no { background: #FEE2E2; color: var(--low); }
+.memo-body { padding: 26px 30px; }
+.memo-rec { font-family: 'Georgia',serif; font-size: 13pt; line-height: 1.5; color: var(--text); font-weight: 600; margin-bottom: 22px; }
+.memo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 22px; }
+.memo-col label { display: block; font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; font-weight: 700; }
+.memo-col ul { list-style: none; }
+.memo-col li { font-size: 9pt; color: var(--text); padding: 5px 0 5px 16px; position: relative; line-height: 1.5; }
+.memo-col li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+.memo-foot { border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-family: 'Helvetica Neue',sans-serif; font-size: 8.5pt; color: var(--muted); }
+.memo-conf { font-weight: 700; color: var(--text); }
+.grade { display: inline-block; font-family: 'Helvetica Neue',sans-serif; font-size: 7pt; font-weight: 800; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; vertical-align: middle; margin-left: 4px; }
+.grade-a { background: #D1FAE5; color: var(--high); }
+.grade-b { background: #FEF3C7; color: var(--medium); }
+.grade-c { background: #FEE2E2; color: var(--low); }
+.stress { background: #F5F3FF; border: 1px solid #DDD6FE; border-left: 4px solid var(--brand); border-radius: 0 10px 10px 0; padding: 22px 26px; margin: 22px 0; }
+.stress h5 { font-family: 'Helvetica Neue',sans-serif; font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; font-weight: 700; }
+.stress-row { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.stress-row:last-child { border-bottom: none; }
+.stress-claim { flex: 1; font-size: 9pt; color: var(--text); line-height: 1.5; }
+.stress-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+.sv-held { background: #D1FAE5; color: var(--high); }
+.sv-weakened { background: #FEF3C7; color: var(--medium); }
+.sv-failed { background: #FEE2E2; color: var(--low); }
 ```
 
 ---
@@ -186,16 +215,39 @@ Build the report in this order:
 
 Group by: Research Intelligence / [Moment Type] Output / Synthesis.
 
-### 3. Executive Summary
+### 3. The Verdict (`.memo`) — Lead With It
+
+Open with a one-page verdict the candidate can act on without reading the
+full report. Build it as a `.memo` block:
+
+- `.memo-head`: title appropriate to the moment ("INTERVIEW VERDICT",
+  "OFFER VERDICT", "APPLICATION VERDICT", "GO / NO-GO") + a
+  `.memo-verdict` pill — `go` (PURSUE / STRONG FIT / ACCEPT), `wait`
+  (PROCEED WITH CAUTION / NEGOTIATE FIRST), or `no` (RECONSIDER / WALK).
+- `.memo-rec`: the single sharpest read on this moment, in 1–2 sentences.
+  Honest, not flattering. "You clear the bar on paper but the last three
+  hires came from FAANG — lead with the system-design story, not tenure."
+- `.memo-grid`: three `.memo-col` columns:
+  - "YOUR EDGE" — the 2–3 things that genuinely differentiate this
+    candidate here, each with a `.grade` badge for how well-evidenced it is
+  - "WHAT MUST GO RIGHT" — what the candidate has to execute for this to work
+  - "BIGGEST RISK" — the single most likely reason this doesn't go their way
+- `.memo-foot`: left = confidence (`.memo-conf`); right = the one move
+  that most improves the odds before the moment.
+
+For STORY_BUILD and RESUME_TAILOR, the memo verdict reflects readiness of
+the materials/stories rather than a go/no-go.
+
+### 4. Executive Summary
 
 `.exec-box` with 2–3 paragraphs:
 - Paragraph 1: The single most decision-relevant finding — what does the evidence actually say about this opportunity, this competitive bar, this company?
 - Paragraph 2: What makes the candidate's position stronger or weaker than it appears on paper.
 - Paragraph 3: The honest constraint — what the candidate must know going in that most won't.
 
-Follow with a 4-cell `.stat-strip` (e.g., company headcount, competitive bar indicator, comp range, culture signal strength).
+Follow with a 4-cell `.stat-strip` (e.g., company headcount, competitive bar indicator, comp range, culture signal strength). Each `.sub` carries a `.grade` badge — especially the comp range, where source strength matters most.
 
-### 4. Research Sections (one per agent)
+### 5. Research Sections (one per agent)
 
 **Visual-first rule**: Every research section must include at least one visual component. In priority order: `.bar-chart`, `.hire-grid`, `.tl`. Text tables are last resort only — never substitute a text table where a bar chart communicates the same finding faster.
 
@@ -207,7 +259,7 @@ Follow with a 4-cell `.stat-strip` (e.g., company headcount, competitive bar ind
 
 **Compensation Agent** — A specific, evidence-based pay range for this role at this company stage. Present as a `.chart-block` with a `.bar-chart` showing the range (floor / midpoint / ceiling) with specific reasoning per band — not a range without explanation.
 
-### 5. Moment-Type Output
+### 6. Moment-Type Output
 
 This is the document shaped by the MOMENT TYPE the Strategist identified.
 
@@ -315,7 +367,7 @@ This is the document shaped by the MOMENT TYPE the Strategist identified.
   each of the six agents, in six sentences. One sentence each. No padding.
   This is the candidate's cheat sheet before they read the full document.
 
-### 6. Risk Flags — What the Candidate Must Know
+### 7. Risk Flags — What the Candidate Must Know
 
 This section immediately follows the Moment-Type Output. It appears before Synthesis.
 
@@ -329,17 +381,35 @@ Do not write generic risks. "Company may not like your background" is not a risk
 
 Skip this section only for STORY_BUILD — stories don't have risk flags, they have gap analysis (already built into that output).
 
-### 7. Synthesis
+### 8. Stress Test (`.stress`) — What We Tried to Disprove
+
+This makes the adversarial review (Orchestrator Stage 3.5) visible, and it
+is part of what makes the report worth paying for: the candidate sees that
+the flattering reads were checked against the evidence, not just asserted.
+Render a `.stress` block titled "WHAT WE TRIED TO DISPROVE" with one
+`.stress-row` per major claim about the candidate's fit or the opportunity:
+- `.stress-claim`: the claim in one sentence (e.g., "This candidate's
+  background clears the bar for the role")
+- `.stress-verdict`: `sv-held` / `sv-weakened` / `sv-failed`
+
+Include 4–6 rows; at least one WEAKENED. A candidate who knows which of
+their advantages held up under scrutiny and which are weaker walks in
+calibrated, not overconfident. Close with one honest sentence on the net read.
+
+Skip for STORY_BUILD and RESUME_TAILOR (those outputs carry their own
+evaluation/scoring layer).
+
+### 9. Synthesis
 
 2–3 `.contra` boxes for contradictions (job posting vs. what culture signals say, comp range vs. what employees report, stated growth stage vs. actual trajectory).
 
 2–3 `.pattern-card` blocks for non-obvious patterns — what becomes visible only by connecting multiple agents' findings.
 
-### 8. Citations
+### 10. Citations
 
 List every source actually consulted. Do not invent sources.
 
-### 9. Footer
+### 11. Footer
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Date + disclaimer that all research reflects web sources at time of generation, compensation ranges are estimates. Do not include the candidate's name or any personal name.

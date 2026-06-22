@@ -203,6 +203,35 @@ body { font-family: 'Georgia','Times New Roman',serif; font-size: 10.5pt; color:
 .toc-title { color: var(--text); }
 .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px; position: relative; top: -3px; }
 .toc-pg { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; color: var(--muted); }
+.memo { border: 2px solid var(--brand); border-radius: 14px; overflow: hidden; margin-bottom: 44px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.memo-head { background: linear-gradient(135deg,var(--brand),#16213E); padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+.memo-head h2 { font-family: 'Helvetica Neue',sans-serif; font-size: 13pt; font-weight: 800; color: white; letter-spacing: 1px; text-transform: uppercase; }
+.memo-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; }
+.memo-verdict.go { background: #D1FAE5; color: var(--high); }
+.memo-verdict.wait { background: #FEF3C7; color: var(--medium); }
+.memo-verdict.no { background: #FEE2E2; color: var(--low); }
+.memo-body { padding: 26px 30px; }
+.memo-rec { font-family: 'Georgia',serif; font-size: 13pt; line-height: 1.5; color: var(--text); font-weight: 600; margin-bottom: 22px; }
+.memo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 22px; }
+.memo-col label { display: block; font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; font-weight: 700; }
+.memo-col ul { list-style: none; }
+.memo-col li { font-size: 9pt; color: var(--text); padding: 5px 0 5px 16px; position: relative; line-height: 1.5; }
+.memo-col li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+.memo-foot { border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-family: 'Helvetica Neue',sans-serif; font-size: 8.5pt; color: var(--muted); }
+.memo-conf { font-weight: 700; color: var(--text); }
+.grade { display: inline-block; font-family: 'Helvetica Neue',sans-serif; font-size: 7pt; font-weight: 800; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; vertical-align: middle; margin-left: 4px; }
+.grade-a { background: #D1FAE5; color: var(--high); }
+.grade-b { background: #FEF3C7; color: var(--medium); }
+.grade-c { background: #FEE2E2; color: var(--low); }
+.stress { background: #F5F3FF; border: 1px solid #DDD6FE; border-left: 4px solid var(--brand); border-radius: 0 10px 10px 0; padding: 22px 26px; margin: 22px 0; }
+.stress h5 { font-family: 'Helvetica Neue',sans-serif; font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; font-weight: 700; }
+.stress-row { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.stress-row:last-child { border-bottom: none; }
+.stress-claim { flex: 1; font-size: 9pt; color: var(--text); line-height: 1.5; }
+.stress-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+.sv-held { background: #D1FAE5; color: var(--high); }
+.sv-weakened { background: #FEF3C7; color: var(--medium); }
+.sv-failed { background: #FEE2E2; color: var(--low); }
 ```
 
 ---
@@ -224,16 +253,39 @@ Build the report in this order:
 
 Group the TOC into the sections you'll actually produce. Only list what exists in the document. Use realistic page numbers starting at 3.
 
-### 3. Executive Summary
+### 3. Decision Memo (`.memo`) — the one-page verdict
+
+This is the first thing in the body and the single most valuable element
+in the report. A time-pressed executive should be able to read only this
+and make the call. Build it as a `.memo` block:
+
+- `.memo-head`: title "DECISION MEMO" + a `.memo-verdict` pill — class
+  `go` / `wait` / `no` with a one-word verdict (ENTER / WAIT / PASS, or
+  the equivalent for the decision type).
+- `.memo-rec`: the recommendation in 1–2 sentences. Direct, specific,
+  staked. Not "you could consider" — "Enter the GTM segment now, lead
+  with the Clay-displacement wedge."
+- `.memo-grid`: three `.memo-col` columns:
+  - "WHY NOW" — the 2–3 strongest pieces of evidence (each with a
+    `.grade` badge)
+  - "WHAT MUST BE TRUE" — the 2–3 assumptions the recommendation
+    depends on
+  - "BIGGEST RISK" — the single most dangerous failure mode, stated plainly
+- `.memo-foot`: left = overall confidence as `.memo-conf` (HIGH / MEDIUM /
+  LOW, justified by the evidence-grade spread); right = the one metric
+  that would prove or disprove this within 90 days.
+
+### 4. Executive Summary
 
 An `.exec-box` with 2–3 substantial paragraphs:
 - Paragraph 1: The single most decision-relevant finding. What does the evidence actually say?
 - Paragraph 2: The supporting context — what makes this finding credible (data points, signals).
 - Paragraph 3: The honest constraint or risk. What must go right, and what could go wrong.
 
-Follow with a `.stat-strip` of 4 key numbers from the research.
+Follow with a `.stat-strip` of 4 key numbers from the research. Each stat's
+`.sub` line carries a `.grade` badge (A/B/C) reflecting source strength.
 
-### 4. Research Sections (one per active agent)
+### 5. Research Sections (one per active agent)
 
 For each agent that ran, produce a `.report-section` with:
 - A numbered section head
@@ -248,7 +300,7 @@ For each agent that ran, produce a `.report-section` with:
 
 **Distribution agent section** — when the Distribution Agent ran, its section must include a "NAMED OUTREACH TARGETS" sub-section. For each channel type where a specific creator, publication, or community is identified, produce one `.company-card` per target (5–8 total). Fields: Name/Channel, Audience Size, Why It Fits, Outreach Hook. Use `.company-badge` to label the channel type (YOUTUBE / NEWSLETTER / COMMUNITY / PODCAST).
 
-### 5. Decision-Type Output Section
+### 6. Decision-Type Output Section
 
 This is the section shaped by the DECISION TYPE the Strategist identified.
 
@@ -325,9 +377,24 @@ Structure the HTML document differently for this mode:
   Skip: Table of Contents, Synthesis section, and Contradictions for OUTREACH mode.
   The footer and cover page still apply.
 
-### 6. Risk Flags — Failure Modes Checked
+### 7. Stress Test (`.stress`) — What We Tried to Disprove
 
-This section immediately follows the Decision-Type Output. It must appear before Synthesis.
+This section makes the Stage 3.5 adversarial review visible to the buyer.
+It is a core part of what justifies the price: it proves the conclusions
+survived a genuine attempt to break them.
+
+Render a `.stress` block titled "WHAT WE TRIED TO DISPROVE". Inside, one
+`.stress-row` per top claim from the adversarial pass:
+- `.stress-claim`: the claim, stated in one sentence
+- `.stress-verdict`: a pill — `sv-held` (HELD), `sv-weakened` (WEAKENED),
+  or `sv-failed` (FAILED → only appears if a claim was demoted, with a
+  note on why it didn't survive)
+
+Include 4–6 rows. At least one should be WEAKENED — a stress test where
+everything held is not a credible stress test. Below the rows, one
+sentence stating what the surviving conclusion set means for confidence.
+
+### 8. Risk Flags — Failure Modes Checked
 
 Produce 4–6 `.contra` boxes labelled "FAILURE MODE [N] — [SHORT NAME]". Each box must:
 - Name the specific way this strategy or recommendation could fail
@@ -337,17 +404,19 @@ Produce 4–6 `.contra` boxes labelled "FAILURE MODE [N] — [SHORT NAME]". Each
 
 Do not write generic risks. "Market may not exist" is not a failure mode. "YouTube outreach fails to generate a creator-driven traffic spike because the first-run experience requires CLI setup that creators won't do on camera" is a failure mode. Be specific.
 
-### 7. Synthesis Section
+### 9. Synthesis Section
 
 Always include:
 - 2–3 `.contra` boxes labelled "CONTRADICTION [N]" — genuine tensions between what different agents found (market data vs. consumer reality, platform policy vs. brand behavior, etc.)
 - 3–4 `.pattern-card` blocks for non-obvious patterns — things that only become visible when you connect findings across agents. Each pattern must reference which agents produced the signal.
 
-### 8. Citation Strip (`.cites`)
+### 10. Citation Strip (`.cites`)
 
-List every source actually consulted. Do not invent sources.
+List every source actually consulted. Do not invent sources. Where a
+source supports a Grade A claim, you may note it; the citation strip is
+also where a skeptical reader checks your evidence grades.
 
-### 9. Footer (`.report-footer`)
+### 11. Footer (`.report-footer`)
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Standard disclaimer — when the report was produced, that it is based on web research at the time of generation, that figures are in [currency from brief] unless stated. Do not include the name of the person who ran the brief.

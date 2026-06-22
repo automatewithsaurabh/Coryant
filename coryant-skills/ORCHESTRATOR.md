@@ -145,6 +145,45 @@ from a simple research summary.
 
 ---
 
+## STAGE 3.5 — Adversarial Review (Red Team Pass)
+
+This is the stage that separates a premium CORYANT deliverable from a
+research summary. Before you synthesize, you deliberately try to
+destroy your own strongest conclusions.
+
+Take the 3–5 most decision-relevant claims emerging from Stages 2–3 —
+the ones the reader will actually act on — and for each one, run an
+adversarial check:
+
+1. **State the claim** in one sentence, as it would appear in the report.
+2. **Attack it.** Actively search for the disconfirming evidence: the
+   source that contradicts it, the alternative explanation, the base
+   rate that makes it less impressive, the survivorship bias, the
+   recency of the data. Run a real search aimed at proving yourself
+   wrong — not at confirming what you already wrote.
+3. **Render a verdict** on each claim:
+   - HELD — the claim survived a genuine attempt to disprove it; multiple
+     independent sources or a primary source support it.
+   - WEAKENED — the claim is directionally right but the evidence is
+     thinner than it first appeared, or a meaningful counter-signal
+     exists; downgrade its confidence and state the caveat.
+   - FAILED — the claim did not survive; it rests on a single weak
+     source, an outdated data point, or an assumption. Remove it from
+     the conclusions or explicitly demote it to a flagged hypothesis.
+
+Carry the HELD/WEAKENED/FAILED verdicts forward — they drive both the
+evidence grades (below) and the visible "stress test" section the mode
+file renders. A report where every claim is marked HELD with no
+WEAKENED items is itself suspect: a real adversarial pass on a real
+market almost always weakens something. If nothing weakened, you did
+not attack hard enough — go back and try again.
+
+For DEEP-depth investigations, run this pass twice: once on the
+agent findings, and once more on the synthesized conclusion after
+Stage 4, before final formatting.
+
+---
+
 ## STAGE 4 — Synthesis Pass
 
 Load and apply the `synthesizer.md` file from the skill pack.
@@ -189,12 +228,54 @@ is the final user-facing output.
 
 ---
 
+## Evidence Grading Standard
+
+Every load-bearing claim in the final report — any finding the reader
+might act on, and every specific number — carries an evidence grade.
+This is what lets a buyer know which findings to bet on and which to
+treat as directional. Apply it consistently:
+
+- **Grade A** — corroborated by two or more independent, credible
+  sources, OR a single primary source (the company's own filing, the
+  competitor's own pricing page, a named first-party dataset). The
+  reader can act on Grade A claims with confidence.
+- **Grade B** — a single credible secondary source, or triangulated
+  from multiple weaker signals that point the same way. Directionally
+  trustworthy; verify before a high-stakes commitment.
+- **Grade C** — inference, a single weak/anonymous source, or a
+  reasonable estimate. Useful for shaping a hypothesis, not for
+  betting the quarter on. Always labelled as such, never laundered
+  into sounding certain.
+
+The mode file renders these as small badges next to claims. A report
+that is all Grade A is either trivial or dishonest — real research
+produces a spread. Show the spread.
+
+## Depth Escalation
+
+Depth is not just a label — it changes how hard you work:
+
+- **SURFACE** — relevant agents run with 2 searches each; one
+  coordinator pass; a light single-claim adversarial check.
+- **STANDARD** — all relevant agents with 3–4 searches each; full
+  coordinator pass; Stage 3.5 adversarial review on the top claims.
+- **DEEP** — maximum agent coverage with 5+ searches each, including
+  follow-up searches triggered by anomalies; two full adversarial
+  passes (once on findings, once on the synthesized conclusion); every
+  conclusion individually evidence-graded. DEEP is what a buyer pays
+  the premium for — it must visibly do more, not just say DEEP on the
+  cover.
+
 ## Throughout — Standing Rules
 
 - Never state a number, statistic, or specific claim you did
   not retrieve via search in this session. If you are recalling
   it from training knowledge, either verify it via search first
   or explicitly flag it as unverified in this run.
+- Every load-bearing claim and every specific number carries an
+  evidence grade (A/B/C, per the standard above). No exceptions.
+- The adversarial pass (Stage 3.5) is not optional. A report that
+  was never stress-tested is not a CORYANT deliverable.
 - Never let an agent's findings go unchallenged if they seem
   too clean or too convenient — that is usually a sign of
   shallow search, not a sign of a clean market.

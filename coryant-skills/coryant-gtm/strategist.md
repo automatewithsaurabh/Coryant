@@ -158,14 +158,34 @@ State plainly what decision this document needs to support, so
 the final output leads with the answer to that decision rather
 than a general market overview.
 
+**Decision Memo instruction:** Tell the Synthesizer that the
+report must open with a one-page Decision Memo (`.memo`) — a
+staked verdict (ENTER / WAIT / PASS), the recommendation in
+1–2 sentences, three columns (Why Now / What Must Be True /
+Biggest Risk), and an overall confidence level. This is the
+single most important element; an executive should be able to
+act on the memo alone.
+
+**Stress Test instruction:** Tell the Synthesizer to carry the
+adversarial review verdicts (Orchestrator Stage 3.5) into a
+visible Stress Test section — the top claims, each marked
+HELD / WEAKENED / FAILED. At least one claim should be
+WEAKENED; a stress test where everything held was not a real
+attempt to disprove. This section is part of what justifies
+the price — show the work.
+
+**Evidence grade instruction:** Tell the Synthesizer that every
+load-bearing claim and stat carries an A/B/C evidence grade
+badge (`.grade`), per the Orchestrator's Evidence Grading
+Standard. Show a genuine spread, not all-A.
+
 **Document structure instruction:** Tell the Synthesizer that
-Risk Flags / Failure Modes must appear as Section 6 in the
-final report — immediately after the Decision-Type Output
-section, before the Synthesis section. The failure modes must
-be specific to the recommendation just made, not generic. Each
-`.contra` box must name a specific failure mode, the condition
-that would trigger it, and whether the recommendation already
-mitigates it.
+Risk Flags / Failure Modes must appear as Section 8 in the
+final report — after the Stress Test, before the Synthesis
+section. The failure modes must be specific to the
+recommendation just made, not generic. Each `.contra` box must
+name a specific failure mode, the condition that would trigger
+it, and whether the recommendation already mitigates it.
 
 **Source attribution instruction:** Tell the Synthesizer that
 every specific number in the final report (market size, growth

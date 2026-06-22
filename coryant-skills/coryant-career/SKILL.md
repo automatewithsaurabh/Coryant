@@ -26,4 +26,15 @@ Moment types supported:
   APPLICATION · INTERVIEW_PREP · NEGOTIATION · DECISION
   RESUME_TAILOR · STORY_BUILD · FULL_PREP
 
+QUALITY LAYER (what makes the output decision-grade):
+- Adversarial Review — before synthesis, the strongest reads on fit and
+  opportunity are attacked with disconfirming searches and marked
+  HELD / WEAKENED / FAILED, so the candidate walks in calibrated, not
+  overconfident. Surfaced in a visible "What We Tried to Disprove" section.
+- Evidence Grading — every claim and number (especially compensation)
+  carries an A/B/C grade by source strength.
+- Decision Memo — every report opens with a one-page, honest verdict the
+  candidate can act on without reading further.
+These run automatically via the Orchestrator's Stage 3.5 and grading standard.
+
 Before starting: confirm web search is available. If not, stop and tell the user — this skill does not function without real-time search.

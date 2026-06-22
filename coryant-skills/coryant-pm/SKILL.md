@@ -28,4 +28,14 @@ Decision types supported:
   ROADMAP_JUSTIFY · LAUNCH_POSITION · PRIORITIZE · METRICS_DEFINITION
   DISCOVERY · COMPETITIVE_RESPONSE · PRD_PREP
 
+QUALITY LAYER (what makes the output decision-grade):
+- Adversarial Review — before synthesis, the strongest conclusions are
+  attacked with disconfirming searches and marked HELD / WEAKENED / FAILED.
+  The surviving claims appear in a visible "What We Tried to Disprove" section.
+- Evidence Grading — every load-bearing claim and number carries an A/B/C
+  grade by source strength, so you know what to defend in a roadmap review.
+- Decision Memo — every report opens with a one-page, staked verdict a
+  stakeholder can act on without reading further.
+These run automatically via the Orchestrator's Stage 3.5 and grading standard.
+
 Before starting: confirm web search is available. If not, stop and tell the user — this skill does not function without real-time search.

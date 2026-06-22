@@ -157,6 +157,35 @@ body { font-family: 'Georgia','Times New Roman',serif; font-size: 10.5pt; color:
 .toc-title { color: var(--text); }
 .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px; position: relative; top: -3px; }
 .toc-pg { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; color: var(--muted); }
+.memo { border: 2px solid var(--brand); border-radius: 14px; overflow: hidden; margin-bottom: 44px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.memo-head { background: linear-gradient(135deg,var(--brand),#16213E); padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+.memo-head h2 { font-family: 'Helvetica Neue',sans-serif; font-size: 13pt; font-weight: 800; color: white; letter-spacing: 1px; text-transform: uppercase; }
+.memo-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; }
+.memo-verdict.go { background: #D1FAE5; color: var(--high); }
+.memo-verdict.wait { background: #FEF3C7; color: var(--medium); }
+.memo-verdict.no { background: #FEE2E2; color: var(--low); }
+.memo-body { padding: 26px 30px; }
+.memo-rec { font-family: 'Georgia',serif; font-size: 13pt; line-height: 1.5; color: var(--text); font-weight: 600; margin-bottom: 22px; }
+.memo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 22px; }
+.memo-col label { display: block; font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; font-weight: 700; }
+.memo-col ul { list-style: none; }
+.memo-col li { font-size: 9pt; color: var(--text); padding: 5px 0 5px 16px; position: relative; line-height: 1.5; }
+.memo-col li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+.memo-foot { border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-family: 'Helvetica Neue',sans-serif; font-size: 8.5pt; color: var(--muted); }
+.memo-conf { font-weight: 700; color: var(--text); }
+.grade { display: inline-block; font-family: 'Helvetica Neue',sans-serif; font-size: 7pt; font-weight: 800; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; vertical-align: middle; margin-left: 4px; }
+.grade-a { background: #D1FAE5; color: var(--high); }
+.grade-b { background: #FEF3C7; color: var(--medium); }
+.grade-c { background: #FEE2E2; color: var(--low); }
+.stress { background: #F5F3FF; border: 1px solid #DDD6FE; border-left: 4px solid var(--brand); border-radius: 0 10px 10px 0; padding: 22px 26px; margin: 22px 0; }
+.stress h5 { font-family: 'Helvetica Neue',sans-serif; font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; font-weight: 700; }
+.stress-row { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.stress-row:last-child { border-bottom: none; }
+.stress-claim { flex: 1; font-size: 9pt; color: var(--text); line-height: 1.5; }
+.stress-verdict { font-family: 'Helvetica Neue',sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+.sv-held { background: #D1FAE5; color: var(--high); }
+.sv-weakened { background: #FEF3C7; color: var(--medium); }
+.sv-failed { background: #FEE2E2; color: var(--low); }
 ```
 
 ---
@@ -178,16 +207,25 @@ Build the report in this order:
 
 Groups: The Ask / Research Evidence / Internal Argument / Synthesis / Open Questions
 
-### 3. The Ask — Lead With It (`.ask-box`)
+### 3. Decision Memo (`.memo`) — Lead With It
 
-Do not bury the ask. Open with it.
+Do not bury the ask. Open with a one-page Decision Memo an exec can act
+on without reading further. Build it as a `.memo` block:
 
-The `.ask-box` must state in 2–3 sentences:
-- Exactly what is being asked (fund, approve, prioritize, de-prioritize)
-- By when / for which planning cycle
-- What the expected outcome is
+- `.memo-head`: title "DECISION MEMO" + a `.memo-verdict` pill — class
+  `go` (FUND / SHIP / PRIORITIZE), `wait` (HOLD / DEFER), or `no`
+  (DON'T BUILD / DE-PRIORITIZE).
+- `.memo-rec`: exactly what is being asked, by when, and the expected
+  outcome — in 1–2 staked sentences.
+- `.memo-grid`: three `.memo-col` columns:
+  - "WHY NOW" — 2–3 strongest evidence points, each with a `.grade` badge
+  - "WHAT MUST BE TRUE" — the load-bearing assumptions behind the ask
+  - "BIGGEST RISK" — the single most likely reason this fails or gets rejected
+- `.memo-foot`: left = overall confidence (`.memo-conf`: HIGH/MEDIUM/LOW
+  justified by the evidence-grade spread); right = the leading metric
+  that proves or kills this within one cycle.
 
-Then a `.stat-strip` of 4 numbers that make the urgency concrete (user signal count, competitor feature date, churn signal, timing window).
+Then a `.stat-strip` of 4 numbers that make the urgency concrete (user signal count, competitor feature date, churn signal, timing window). Each `.sub` line carries a `.grade` badge.
 
 ### 4. Research Sections
 
@@ -218,9 +256,19 @@ This is the core of the document. Structure it in this order:
 
 **The Ask, Restated** — Close exactly where you opened, now backed by the evidence. Restate the specific decision or resource being requested.
 
-### 6. Risk Flags — What Could Go Wrong
+### 6. Stress Test (`.stress`) — What We Tried to Disprove
 
-This section immediately follows The Internal Argument. It appears before Open Questions.
+This makes the adversarial review (Orchestrator Stage 3.5) visible. Render
+a `.stress` block titled "WHAT WE TRIED TO DISPROVE" with one `.stress-row`
+per top claim from the argument:
+- `.stress-claim`: the claim in one sentence
+- `.stress-verdict`: `sv-held` / `sv-weakened` / `sv-failed`
+
+Include 4–6 rows; at least one WEAKENED. Close with one sentence on what
+the surviving claim set means for how hard to push this internally. An
+exec who sees their PM already stress-tested the argument trusts it more.
+
+### 7. Risk Flags — What Could Go Wrong
 
 Produce 3–5 `.contra` boxes labelled "RISK [N] — [SHORT NAME]". Each must:
 - Name the specific way this recommendation or roadmap direction could fail or be rejected
@@ -230,21 +278,21 @@ Produce 3–5 `.contra` boxes labelled "RISK [N] — [SHORT NAME]". Each must:
 
 Do not write generic risks. "Users may not adopt it" is not a risk flag. "Amplitude's August 2025 session replay release captures 70% of the stated use case — if they ship funnel analysis in H1 2026, the differentiation argument collapses before roadmap approval" is a risk flag.
 
-### 7. Open Questions
+### 8. Open Questions
 
 Be explicit about what remains uncertain. A document honest about its limits is more credible to internal audiences than one that overclaims. Use a bulleted list inside a `.report-section`.
 
-### 8. Synthesis
+### 9. Synthesis
 
 2 `.contra` boxes for genuine tensions in the evidence (user demand vs. market timing, competitive urgency vs. internal capacity, etc.).
 
 2–3 `.pattern-card` blocks for non-obvious patterns — what becomes visible only when findings from multiple agents are connected. Each must reference which agents produced the signal.
 
-### 9. Citations
+### 10. Citations
 
 List every source actually consulted. Do not invent sources.
 
-### 10. Footer
+### 11. Footer
 
 Left: "CORYANT" in `.footer-brand` — nothing else, no personal name.
 Right: Date + "Prepared for internal use" + disclaimer on research basis. Do not include the name of the person who ran the brief.

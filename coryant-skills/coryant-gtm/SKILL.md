@@ -31,4 +31,14 @@ Decision types supported:
 
 Note: The Strategist determines which agents are relevant per brief — not all nine always run. OUTREACH briefs route through ICP Agent → Signals Agent → Sequence Agent and produce ready-to-deploy sequences, not just a report.
 
+QUALITY LAYER (what makes the output decision-grade):
+- Adversarial Review — before synthesis, the strongest conclusions are
+  attacked with disconfirming searches and marked HELD / WEAKENED / FAILED.
+  The surviving claims appear in a visible "What We Tried to Disprove" section.
+- Evidence Grading — every load-bearing claim and number carries an A/B/C
+  grade by source strength, so you know what to bet on.
+- Decision Memo — every report opens with a one-page, staked verdict an
+  executive can act on without reading further.
+These run automatically via the Orchestrator's Stage 3.5 and grading standard.
+
 Before starting: confirm web search is available. If not, stop and tell the user — this skill does not function without real-time search.
