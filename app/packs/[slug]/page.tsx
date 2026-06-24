@@ -1,8 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PACKS, PackSlug } from "@/lib/packs-data";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import PackDetailClient from "@/components/marketing/PackDetailClient";
+
+// Always render fresh per request — never serve a stale cached version
+// where isLoggedIn / hasPurchased would be wrong.
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return [
@@ -47,7 +51,9 @@ export default async function PackPage({
 
   let hasPurchased = false;
   if (user) {
-    const { data } = await supabase
+    // Use the admin client so RLS never silently hides a legitimate purchase.
+    const admin = createAdminClient();
+    const { data } = await admin
       .from("purchases")
       .select("id")
       .eq("user_id", user.id)

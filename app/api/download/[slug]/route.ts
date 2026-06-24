@@ -4,6 +4,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 60_000;

@@ -158,7 +158,7 @@ export default function PackDetailClient({
             <span>$0 INFERENCE COST</span>
           </div>
 
-          {/* CTA */}
+          {/* CTA — text changes based on auth + purchase state */}
           <a
             href="#install"
             className="hover-dim transition-fast"
@@ -174,7 +174,9 @@ export default function PackDetailClient({
               borderRadius: "4px",
             }}
           >
-            Install this pack
+            {!isLoggedIn && "Sign in to purchase →"}
+            {isLoggedIn && !hasPurchased && "Buy for ₹2,900 →"}
+            {isLoggedIn && hasPurchased && "Install this pack →"}
           </a>
         </div>
       </section>
