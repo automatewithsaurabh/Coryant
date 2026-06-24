@@ -22,7 +22,7 @@ export async function GET(
     );
   }
 
-  // Require authentication before serving any zip.
+  // Require authentication and a purchase record before serving any zip.
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
@@ -30,6 +30,16 @@ export async function GET(
   }
 
   const { slug } = await params;
+
+  const { data: purchase } = await supabase
+    .from("purchases")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("pack_slug", slug)
+    .maybeSingle();
+  if (!purchase) {
+    return NextResponse.json({ error: "Purchase required" }, { status: 403 });
+  }
 
   if (!isValidPackSlug(slug)) {
     return NextResponse.json({ error: "Pack not found" }, { status: 404 });

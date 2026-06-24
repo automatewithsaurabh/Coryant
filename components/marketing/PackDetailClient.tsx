@@ -1,16 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { PACKS, Pack, PackSlug } from "@/lib/packs-data";
 import SectionLabel from "./SectionLabel";
 import BinaryStream from "./BinaryStream";
 import Footer from "./Footer";
+import RazorpayButton from "./RazorpayButton";
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isLoggedIn: boolean }) {
+export default function PackDetailClient({
+  pack,
+  isLoggedIn,
+  hasPurchased: initialHasPurchased,
+}: {
+  pack: Pack;
+  isLoggedIn: boolean;
+  hasPurchased: boolean;
+}) {
+  const [hasPurchased, setHasPurchased] = useState(initialHasPurchased);
   const otherPacks = (Object.values(PACKS) as Pack[]).filter(
     (p) => p.slug !== pack.slug
   );
@@ -449,28 +460,8 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
             </div>
           </div>
 
-          {/* Download button — requires auth */}
-          {isLoggedIn ? (
-            <a
-              href={`/api/download/${pack.slug}`}
-              download={`coryant-${pack.slug}.zip`}
-              className="hover-dim transition-fast"
-              style={{
-                display: "inline-block",
-                fontFamily: "var(--font-mono)",
-                fontSize: "12px",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                background: "var(--accent)",
-                color: "var(--ink)",
-                padding: "12px 24px",
-                borderRadius: "4px",
-                textDecoration: "none",
-              }}
-            >
-              Download {pack.name} pack →
-            </a>
-          ) : (
+          {/* Purchase / Download CTA */}
+          {!isLoggedIn && (
             <Link
               href={`/login?next=/packs/${pack.slug}`}
               className="hover-dim transition-fast"
@@ -487,8 +478,62 @@ export default function PackDetailClient({ pack, isLoggedIn }: { pack: Pack; isL
                 textDecoration: "none",
               }}
             >
-              Sign in to download →
+              Sign in to purchase →
             </Link>
+          )}
+
+          {isLoggedIn && !hasPurchased && (
+            <div>
+              <RazorpayButton
+                packSlug={pack.slug}
+                packName={pack.name}
+                onSuccess={() => setHasPurchased(true)}
+              />
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "11px",
+                  color: "var(--ink-faint)",
+                  marginTop: "12px",
+                }}
+              >
+                ₹2,900 · one-time · instant download after payment
+              </p>
+            </div>
+          )}
+
+          {isLoggedIn && hasPurchased && (
+            <div>
+              <a
+                href={`/api/download/${pack.slug}`}
+                download={`coryant-${pack.slug}.zip`}
+                className="hover-dim transition-fast"
+                style={{
+                  display: "inline-block",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  background: "var(--accent)",
+                  color: "var(--ink)",
+                  padding: "12px 24px",
+                  borderRadius: "4px",
+                  textDecoration: "none",
+                }}
+              >
+                Download {pack.name} →
+              </a>
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "11px",
+                  color: "var(--ink-faint)",
+                  marginTop: "12px",
+                }}
+              >
+                Purchase confirmed · re-download any time
+              </p>
+            </div>
           )}
         </div>
       </section>

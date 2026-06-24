@@ -45,5 +45,16 @@ export default async function PackPage({
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  return <PackDetailClient pack={pack} isLoggedIn={!!user} />;
+  let hasPurchased = false;
+  if (user) {
+    const { data } = await supabase
+      .from("purchases")
+      .select("id")
+      .eq("user_id", user.id)
+      .eq("pack_slug", slug)
+      .maybeSingle();
+    hasPurchased = !!data;
+  }
+
+  return <PackDetailClient pack={pack} isLoggedIn={!!user} hasPurchased={hasPurchased} />;
 }
