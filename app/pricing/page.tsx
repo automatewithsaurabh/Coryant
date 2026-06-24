@@ -44,8 +44,8 @@ export default function PricingPage() {
             marginBottom: "48px",
           }}
         >
-          Every pack is $29/month. Install one or install all. No inference cost
-          on top. No credits. No surprises.
+          Every pack is $29, one time. Install one or install all. No inference
+          cost on top. No credits. No surprises.
         </p>
 
         {/* PRICING CARD */}
@@ -91,7 +91,7 @@ export default function PricingPage() {
                 color: "var(--ink-soft)",
               }}
             >
-              / month
+              one time
             </span>
           </div>
           <div
@@ -102,7 +102,7 @@ export default function PricingPage() {
               marginBottom: "20px",
             }}
           >
-            per pack · any pack
+            per pack · any pack · yours to keep
           </div>
 
           <div
@@ -185,7 +185,7 @@ export default function PricingPage() {
           }}
         >
           <span>Requires Claude Pro or Max subscription.</span>
-          <span>Annual plans and team pricing coming soon.</span>
+          <span>Team bundles and volume pricing coming soon.</span>
           <span>
             Questions?{" "}
             <a
