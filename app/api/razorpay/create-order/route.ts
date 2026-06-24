@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getRazorpay, getPackPricePaise } from "@/lib/razorpay";
+import { createRazorpayOrder, getPackPricePaise } from "@/lib/razorpay";
 import { createClient } from "@/lib/supabase/server";
 import { rateLimit } from "@/lib/rate-limit";
 import { isValidPackSlug } from "@/lib/build-pack-zip";
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const order = await getRazorpay().orders.create({
+    const order = await createRazorpayOrder({
       amount,
       currency: "INR",
       receipt: `${slug}-${user.id.slice(0, 8)}-${Date.now()}`,

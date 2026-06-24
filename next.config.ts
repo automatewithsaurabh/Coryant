@@ -43,11 +43,6 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  // Tell Next.js not to bundle the Razorpay Node.js SDK — let Node.js load it
-  // natively at runtime. Bundling it fails because it uses Node built-ins
-  // (crypto, https, querystring) that webpack can't resolve in the build phase.
-  serverExternalPackages: ["razorpay"],
-
   async headers() {
     return [
       {

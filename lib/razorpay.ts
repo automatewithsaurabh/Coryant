@@ -1,19 +1,46 @@
-import Razorpay from "razorpay";
-
-let _razorpay: Razorpay | null = null;
-
-export function getRazorpay(): Razorpay {
-  if (_razorpay) return _razorpay;
-  const key_id = process.env.RAZORPAY_KEY_ID;
-  const key_secret = process.env.RAZORPAY_KEY_SECRET;
-  if (!key_id || !key_secret) {
-    throw new Error("RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET must be set");
-  }
-  _razorpay = new Razorpay({ key_id, key_secret });
-  return _razorpay;
-}
-
 /** Pack price in paise (default ₹2,900 ≈ $29 USD). Override via RAZORPAY_AMOUNT_PAISE. */
 export function getPackPricePaise(): number {
   return parseInt(process.env.RAZORPAY_AMOUNT_PAISE ?? "290000", 10);
+}
+
+function basicAuth(): string {
+  const keyId = process.env.RAZORPAY_KEY_ID;
+  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  if (!keyId || !keySecret) {
+    throw new Error("RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET must be set");
+  }
+  return "Basic " + Buffer.from(`${keyId}:${keySecret}`).toString("base64");
+}
+
+export interface RazorpayOrder {
+  id: string;
+  amount: number;
+  currency: string;
+  receipt: string;
+  status: string;
+}
+
+export async function createRazorpayOrder(params: {
+  amount: number;
+  currency: string;
+  receipt: string;
+  notes?: Record<string, string>;
+}): Promise<RazorpayOrder> {
+  const res = await fetch("https://api.razorpay.com/v1/orders", {
+    method: "POST",
+    headers: {
+      Authorization: basicAuth(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(params),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(
+      `Razorpay API error ${res.status}: ${err?.error?.description ?? res.statusText}`
+    );
+  }
+
+  return res.json() as Promise<RazorpayOrder>;
 }
