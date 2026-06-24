@@ -1,4 +1,13 @@
-const productLinks = ["Packs", "Pipeline", "Architecture", "Install"];
+import Link from "next/link";
+
+const productLinks = [
+  { label: "All Packs", href: "/packs" },
+  { label: "GTM Pack", href: "/packs/gtm" },
+  { label: "Career Pack", href: "/packs/career" },
+  { label: "Pipeline", href: "/#pipeline" },
+  { label: "Install", href: "/#get-started" },
+];
+
 const communityLinks = [
   { label: "Discord", href: "#discord" },
   { label: "X / Twitter", href: "#twitter" },
@@ -82,9 +91,9 @@ export default function Footer() {
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {productLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+              <Link
+                key={link.label}
+                href={link.href}
                 className="hover-accent transition-fast"
                 style={{
                   fontFamily: "var(--font-sans)",
@@ -92,8 +101,8 @@ export default function Footer() {
                   color: "var(--ink-soft)",
                 }}
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             ))}
           </div>
         </div>
@@ -136,6 +145,9 @@ export default function Footer() {
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <span
@@ -147,6 +159,17 @@ export default function Footer() {
         >
           © 2026 CORYANT
         </span>
+        <a
+          href="mailto:hello@coryant.xyz"
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "11px",
+            color: "var(--ink-faint)",
+            textDecoration: "none",
+          }}
+        >
+          hello@coryant.xyz
+        </a>
       </div>
 
       <style>{`

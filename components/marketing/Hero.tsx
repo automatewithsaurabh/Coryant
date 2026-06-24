@@ -52,20 +52,34 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
               gap: "28px",
             }}
           >
-            {[
-              { label: "PACKS", href: "#packs" },
-              { label: "HOW IT WORKS", href: "#pipeline" },
-              { label: "INSTALL", href: "#get-started" },
-            ].map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="hover-accent transition-fast"
-                style={{ color: "var(--ink-soft)" }}
-              >
-                {label}
-              </a>
-            ))}
+            <Link
+              href="/packs"
+              className="hover-accent transition-fast"
+              style={{ color: "var(--ink-soft)" }}
+            >
+              PACKS
+            </Link>
+            <a
+              href="/#pipeline"
+              className="hover-accent transition-fast"
+              style={{ color: "var(--ink-soft)" }}
+            >
+              HOW IT WORKS
+            </a>
+            <Link
+              href="/pricing"
+              className="hover-accent transition-fast"
+              style={{ color: "var(--ink-soft)" }}
+            >
+              PRICING
+            </Link>
+            <a
+              href="/#get-started"
+              className="hover-accent transition-fast"
+              style={{ color: "var(--ink-soft)" }}
+            >
+              INSTALL
+            </a>
           </div>
           <Link
             href={isLoggedIn ? "/dashboard" : "/login"}

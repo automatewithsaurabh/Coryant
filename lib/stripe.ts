@@ -15,9 +15,16 @@ export function getStripe(): Stripe {
 
 export function getPriceId(slug: PackSlug): string {
   const map: Record<PackSlug, string | undefined> = {
-    career: process.env.STRIPE_PRICE_CAREER,
-    gtm:    process.env.STRIPE_PRICE_GTM,
-    pm:     process.env.STRIPE_PRICE_PM,
+    career:                process.env.STRIPE_PRICE_CAREER,
+    gtm:                   process.env.STRIPE_PRICE_GTM,
+    pm:                    process.env.STRIPE_PRICE_PM,
+    "founders-associate":  process.env.STRIPE_PRICE_FOUNDERS_ASSOCIATE,
+    "chartered-accountant": process.env.STRIPE_PRICE_CHARTERED_ACCOUNTANT,
+    content:               process.env.STRIPE_PRICE_CONTENT,
+    sales:                 process.env.STRIPE_PRICE_SALES,
+    "supply-chain":        process.env.STRIPE_PRICE_SUPPLY_CHAIN,
+    tutor:                 process.env.STRIPE_PRICE_TUTOR,
+    "real-estate":         process.env.STRIPE_PRICE_REAL_ESTATE,
   };
   const id = map[slug];
   if (!id) throw new Error(`No Stripe price configured for pack: ${slug}`);

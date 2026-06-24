@@ -2,8 +2,32 @@ import JSZip from "jszip";
 import fs from "fs";
 import path from "path";
 
-const VALID_SLUGS = ["career", "gtm", "pm"] as const;
+const VALID_SLUGS = [
+  "career",
+  "gtm",
+  "pm",
+  "founders-associate",
+  "chartered-accountant",
+  "content",
+  "sales",
+  "supply-chain",
+  "tutor",
+  "real-estate",
+] as const;
 type PackSlug = (typeof VALID_SLUGS)[number];
+
+const FOLDER_NAMES: Record<string, string> = {
+  career: "coryant-career",
+  gtm: "coryant-gtm",
+  pm: "coryant-pm",
+  "founders-associate": "coryant-founders-associate",
+  "chartered-accountant": "coryant-chartered-accountant",
+  content: "coryant-content",
+  sales: "coryant-sales",
+  "supply-chain": "coryant-supply-chain",
+  tutor: "coryant-tutor",
+  "real-estate": "coryant-real-estate",
+};
 
 const SKILLS_ROOT = path.join(process.cwd(), "coryant-skills");
 
@@ -26,8 +50,12 @@ export async function buildPackZip(slug: string): Promise<Buffer> {
     throw new Error(`Invalid pack slug: ${slug}`);
   }
 
+  const packFolderName = FOLDER_NAMES[slug];
+  if (!packFolderName) {
+    throw new Error(`No folder mapping for slug: ${slug}`);
+  }
+
   const zip = new JSZip();
-  const packFolderName = `coryant-${slug}`;
   const packPath = path.join(SKILLS_ROOT, packFolderName);
   const orchestratorPath = path.join(SKILLS_ROOT, "ORCHESTRATOR.md");
 

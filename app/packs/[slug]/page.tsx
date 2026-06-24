@@ -5,7 +5,18 @@ import { createClient } from "@/lib/supabase/server";
 import PackDetailClient from "@/components/marketing/PackDetailClient";
 
 export function generateStaticParams() {
-  return Object.keys(PACKS).map((slug) => ({ slug }));
+  return [
+    { slug: "career" },
+    { slug: "gtm" },
+    { slug: "pm" },
+    { slug: "founders-associate" },
+    { slug: "chartered-accountant" },
+    { slug: "content" },
+    { slug: "sales" },
+    { slug: "supply-chain" },
+    { slug: "tutor" },
+    { slug: "real-estate" },
+  ];
 }
 
 export async function generateMetadata({

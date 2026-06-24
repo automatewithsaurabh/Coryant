@@ -1,28 +1,29 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SectionLabel from "./SectionLabel";
 import BinaryStream from "./BinaryStream";
-import { PACKS } from "@/lib/packs-data";
+import {
+  PACKS,
+  CATEGORY_LABELS,
+  CATEGORY_DESCRIPTIONS,
+  PackCategory,
+} from "@/lib/packs-data";
 
-function AgentPill({ label }: { label: string }) {
-  return (
-    <span
-      style={{
-        fontFamily: "var(--font-mono)",
-        fontSize: "10px",
-        color: "var(--ink-faint)",
-        border: "1px solid var(--rule-strong)",
-        padding: "3px 9px",
-        borderRadius: "2px",
-        letterSpacing: "0.04em",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {label}
-    </span>
-  );
-}
+const CATEGORIES: { key: PackCategory; index: string }[] = [
+  { key: "business", index: "01" },
+  { key: "roles", index: "02" },
+  { key: "knowledge", index: "03" },
+];
 
 export default function PacksSection() {
+  const [openCategory, setOpenCategory] = useState<PackCategory | null>(null);
+  const router = useRouter();
+
+  const allPacks = Object.values(PACKS);
+
   return (
     <section
       id="packs"
@@ -36,8 +37,15 @@ export default function PacksSection() {
       }}
     >
       <BinaryStream density={20} />
-      <div style={{ position: "relative", zIndex: 1, maxWidth: "1100px", margin: "0 auto" }}>
-        <SectionLabel number="01" label="PACKS" />
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "1100px",
+          margin: "0 auto",
+        }}
+      >
+        <SectionLabel number="02" label="PACKS" />
         <h2
           style={{
             fontFamily: "var(--font-sans)",
@@ -54,160 +62,231 @@ export default function PacksSection() {
             fontFamily: "var(--font-mono)",
             fontSize: "13px",
             color: "var(--ink-faint)",
-            marginBottom: "64px",
+            marginBottom: "16px",
           }}
         >
-          Structured · Multi-agent · Source-grounded. Three verticals. One orchestrator.
+          10 packs · 3 categories · one orchestrator
         </p>
+        <Link
+          href="/packs"
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "12px",
+            color: "var(--accent)",
+            textDecoration: "none",
+            display: "block",
+            marginBottom: "48px",
+          }}
+        >
+          View all packs →
+        </Link>
 
-        {(Object.values(PACKS)).map((pack) => (
-          <div
-            key={pack.slug}
-            className="pack-row"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "80px 1fr 280px",
-              gap: "32px",
-              padding: "48px 0",
-              borderBottom: "1px solid var(--rule)",
-              alignItems: "start",
-            }}
-          >
-            {/* LEFT: index */}
-            <span
+        {/* CATEGORY ROWS */}
+        {CATEGORIES.map(({ key, index }, catIdx) => {
+          const isOpen = openCategory === key;
+          const packsInCategory = allPacks.filter((p) => p.category === key);
+          const isLast = catIdx === CATEGORIES.length - 1;
+
+          return (
+            <div
+              key={key}
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "13px",
-                color: "var(--ink-faint)",
-                paddingTop: "4px",
+                borderTop: "1px solid var(--rule)",
+                borderBottom: isLast ? "1px solid var(--rule)" : undefined,
               }}
             >
-              {pack.index}
-            </span>
-
-            {/* MIDDLE: content */}
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
-                <h3
+              {/* HEADER ROW */}
+              <div
+                onClick={() => setOpenCategory(isOpen ? null : key)}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "60px 1fr auto",
+                  gap: "24px",
+                  padding: "24px 0",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  transition: "background 150ms",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background =
+                    "rgba(255,255,255,0.02)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "transparent")
+                }
+              >
+                <span
                   style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "24px",
-                    fontWeight: 500,
-                    color: "var(--ink)",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "13px",
+                    color: "var(--ink-faint)",
                   }}
                 >
-                  {pack.name}
-                </h3>
-                {pack.badge && (
+                  {index}
+                </span>
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "22px",
+                      fontWeight: 500,
+                      color: "var(--ink)",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {CATEGORY_LABELS[key]}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "12px",
+                      color: "var(--ink-faint)",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {CATEGORY_DESCRIPTIONS[key]}
+                  </div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+                    {packsInCategory.map((p) => (
+                      <span
+                        key={p.slug}
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: "10px",
+                          color: "var(--ink-faint)",
+                          border: "1px solid var(--rule-strong)",
+                          padding: "2px 8px",
+                          borderRadius: "2px",
+                        }}
+                      >
+                        {p.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
                   <span
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "9px",
-                      background: "var(--accent-dim)",
-                      color: "var(--accent)",
-                      padding: "2px 8px",
-                      border: "1px solid var(--accent-border)",
-                      borderRadius: "2px",
-                      letterSpacing: "0.06em",
-                      textTransform: "uppercase",
+                      fontSize: "13px",
+                      color: "var(--ink-faint)",
                     }}
                   >
-                    {pack.badge}
+                    {packsInCategory.length} packs
                   </span>
-                )}
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "16px",
+                      color: "var(--ink-faint)",
+                    }}
+                  >
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </div>
               </div>
-              <p
+
+              {/* EXPANDED PACK GRID */}
+              <div
                 style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "15px",
-                  color: "var(--ink-soft)",
-                  maxWidth: "480px",
-                  lineHeight: 1.6,
-                  marginBottom: "20px",
+                  maxHeight: isOpen ? "600px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 200ms ease",
                 }}
               >
-                {pack.description}
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                {pack.agents.map((agent) => (
-                  <AgentPill key={agent.name} label={agent.name.toUpperCase()} />
-                ))}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                      "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: "1px",
+                    background: "var(--rule)",
+                    marginBottom: "0",
+                  }}
+                >
+                  {packsInCategory.map((pack) => (
+                    <div
+                      key={pack.slug}
+                      onClick={() => router.push(`/packs/${pack.slug}`)}
+                      style={{
+                        background: "var(--bg-raised)",
+                        padding: "20px 24px",
+                        cursor: "pointer",
+                        transition: "all 150ms",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.background = "var(--bg-panel)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.background = "var(--bg-raised)")
+                      }
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "15px",
+                          fontWeight: 500,
+                          color: "var(--ink)",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {pack.name}
+                      </div>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-sans)",
+                          fontSize: "12px",
+                          color: "var(--ink-soft)",
+                          lineHeight: 1.5,
+                          marginBottom: "12px",
+                        }}
+                      >
+                        {pack.tagline}
+                      </p>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: "10px",
+                            color: "var(--ink-faint)",
+                          }}
+                        >
+                          {pack.agentCount} agents
+                        </span>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: "11px",
+                            color: "var(--accent)",
+                          }}
+                        >
+                          Install →
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* RIGHT: stats + CTA */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-end" }}>
-              <span
-                style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "var(--ink-faint)" }}
-              >
-                {pack.agentCount} agents
-              </span>
-              <span
-                style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "var(--ink-faint)" }}
-              >
-                {pack.modeLabel}
-              </span>
-              <Link
-                href={`/packs/${pack.slug}`}
-                className="pack-install-btn hover-accent-border transition-fast"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "11px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                  color: "var(--ink-soft)",
-                  border: "1px solid var(--rule-strong)",
-                  padding: "8px 16px",
-                  borderRadius: "2px",
-                  marginTop: "8px",
-                  display: "inline-block",
-                }}
-              >
-                Install pack →
-              </Link>
-            </div>
-          </div>
-        ))}
-
-        {/* DASHED TEASER ROW */}
-        <div
-          style={{
-            padding: "36px 0",
-            borderTop: "1px dashed var(--rule-strong)",
-            borderBottom: "1px dashed var(--rule-strong)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: "15px",
-              color: "var(--ink-faint)",
-            }}
-          >
-            More packs in progress: Student, Founder, role-specific
-          </p>
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "12px",
-              color: "var(--ink-faint)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            More coming soon
-          </span>
-        </div>
+          );
+        })}
       </div>
 
       <style>{`
         @media (max-width: 768px) {
-          .pack-row { grid-template-columns: 1fr !important; gap: 20px !important; }
-          .pack-row > div:last-child { align-items: flex-start !important; }
+          .mob-section { padding: 48px 20px !important; }
         }
       `}</style>
     </section>
