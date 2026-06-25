@@ -62,23 +62,35 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 });
   }
 
-  // Record purchase in Supabase — upsert so a double-click or retry never
-  // creates a duplicate row (unique constraint on user_id + pack_slug).
   const admin = createAdminClient();
-  const { error: dbError } = await admin.from("purchases").upsert(
-    {
+
+  // Check if purchase already exists (webhook may have already recorded it)
+  const { data: existing } = await admin
+    .from("purchases")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("pack_slug", slug)
+    .limit(1)
+    .maybeSingle();
+
+  if (!existing) {
+    // No record yet — insert it
+    const { error: dbError } = await admin.from("purchases").insert({
       user_id: user.id,
       pack_slug: slug,
       stripe_checkout_session_id: razorpay_order_id,
       stripe_payment_intent_id: razorpay_payment_id,
       amount_total: null,
       currency: "INR",
-    },
-    { onConflict: "user_id,pack_slug", ignoreDuplicates: true }
-  );
+    });
 
-  if (dbError) {
-    console.error("Failed to record Razorpay purchase:", dbError.message);
+    if (dbError) {
+      // 23505 = unique violation — webhook already inserted, safe to proceed
+      if (dbError.code !== "23505") {
+        console.error("Failed to record purchase:", dbError.message, dbError.code);
+        return NextResponse.json({ error: "Payment verified but failed to activate. Contact support." }, { status: 500 });
+      }
+    }
   }
 
   return NextResponse.json({ success: true });
