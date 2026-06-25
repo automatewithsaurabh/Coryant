@@ -1,6 +1,6 @@
-/** Pack price in paise (default ₹2,900 ≈ $29 USD). Override via RAZORPAY_AMOUNT_PAISE. */
+/** Pack price in paise (default ₹1,999). Override via RAZORPAY_AMOUNT_PAISE. */
 export function getPackPricePaise(): number {
-  return parseInt(process.env.RAZORPAY_AMOUNT_PAISE ?? "290000", 10);
+  return parseInt(process.env.RAZORPAY_AMOUNT_PAISE ?? "199900", 10);
 }
 
 function basicAuth(): string {

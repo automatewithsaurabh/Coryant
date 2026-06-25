@@ -107,7 +107,7 @@ export default function PricingSection() {
                   lineHeight: 1,
                 }}
               >
-                ₹2,900
+                ₹1,999
               </span>
               <span
                 style={{

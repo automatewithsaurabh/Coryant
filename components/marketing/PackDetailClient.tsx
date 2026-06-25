@@ -177,7 +177,7 @@ export default function PackDetailClient({
             }}
           >
             {!isLoggedIn && "Sign in to purchase →"}
-            {isLoggedIn && !hasPurchased && "Buy for ₹2,900 →"}
+            {isLoggedIn && !hasPurchased && "Buy for ₹1,999 →"}
             {isLoggedIn && hasPurchased && "Install this pack →"}
           </a>
         </div>
@@ -502,7 +502,7 @@ export default function PackDetailClient({
                   marginTop: "12px",
                 }}
               >
-                ₹2,900 · one-time · instant download after payment
+                ₹1,999 · one-time · instant download after payment
               </p>
             </div>
           )}

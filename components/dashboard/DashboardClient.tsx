@@ -283,7 +283,7 @@ export default function DashboardClient({
                           display: "inline-block",
                         }}
                       >
-                        Buy ₹2,900 →
+                        Buy ₹1,999 →
                       </a>
                     </>
                   )}
@@ -355,7 +355,7 @@ export default function DashboardClient({
                         {pack?.name ?? p.pack_slug}
                       </p>
                       <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
-                        {p.currency} {p.amount_total ? (p.amount_total / 100).toLocaleString("en-IN") : "2,900"}
+                        {p.currency} {p.amount_total ? (p.amount_total / 100).toLocaleString("en-IN") : "1,999"}
                       </p>
                     </div>
                     <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>

@@ -131,7 +131,7 @@ export default function RazorpayButton({ packSlug, packName, userEmail, onSucces
           transition: "opacity 150ms",
         }}
       >
-        {loading ? "Processing…" : `Buy for ₹2,900 →`}
+        {loading ? "Processing…" : `Buy for ₹1,999 →`}
       </button>
       {error && (
         <p

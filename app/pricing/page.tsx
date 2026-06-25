@@ -44,7 +44,7 @@ export default function PricingPage() {
             marginBottom: "48px",
           }}
         >
-          Every pack is $29, one time. Install one or install all. No inference
+          Every pack is ₹1,999, one time. Install one or install all. No inference
           cost on top. No credits. No surprises.
         </p>
 
@@ -82,7 +82,7 @@ export default function PricingPage() {
                 lineHeight: 1,
               }}
             >
-              $29
+              ₹1,999
             </span>
             <span
               style={{
@@ -186,15 +186,7 @@ export default function PricingPage() {
         >
           <span>Requires Claude Pro or Max subscription.</span>
           <span>Team bundles and volume pricing coming soon.</span>
-          <span>
-            Questions?{" "}
-            <a
-              href="mailto:hello@coryant.xyz"
-              style={{ color: "var(--ink-faint)", textDecoration: "underline" }}
-            >
-              hello@coryant.xyz
-            </a>
-          </span>
+          <span>Payments processed securely via Razorpay.</span>
         </div>
       </div>
     </main>

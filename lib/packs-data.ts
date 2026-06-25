@@ -12,7 +12,7 @@ export const PACKS = {
     modeLabel: "4 output modes",
     badge: null,
     category: "business" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Company + Role",
@@ -70,7 +70,7 @@ export const PACKS = {
     modeLabel: "5 decision types",
     badge: "MOST INSTALLED",
     category: "business" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Market",
@@ -142,7 +142,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "business" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "User Signal",
@@ -191,7 +191,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "roles" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Company Intelligence",
@@ -245,7 +245,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "roles" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Regulatory Intelligence",
@@ -299,7 +299,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "business" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Audience Signal",
@@ -348,7 +348,7 @@ export const PACKS = {
     modeLabel: "3 output modes",
     badge: null,
     category: "business" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Account Intelligence",
@@ -401,7 +401,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "business" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Supplier Landscape",
@@ -455,7 +455,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "knowledge" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Academic Landscape",
@@ -504,7 +504,7 @@ export const PACKS = {
     modeLabel: "2 output modes",
     badge: null,
     category: "knowledge" as const,
-    price: "$29",
+    price: "₹1,999",
     agents: [
       {
         name: "Market Intelligence",
