@@ -218,14 +218,7 @@ export default function PacksSection() {
                         background: "var(--bg-raised)",
                         padding: "20px 24px",
                         cursor: "pointer",
-                        transition: "all 150ms",
                       }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.background = "var(--bg-panel)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.background = "var(--bg-raised)")
-                      }
                     >
                       <div
                         style={{
