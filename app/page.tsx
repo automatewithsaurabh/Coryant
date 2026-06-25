@@ -4,6 +4,8 @@ import PacksSection from "@/components/marketing/PacksSection";
 import PipelineTrace from "@/components/marketing/PipelineTrace";
 import ArchitectureSection from "@/components/marketing/ArchitectureSection";
 import InstallSection from "@/components/marketing/InstallSection";
+import PricingSection from "@/components/marketing/PricingSection";
+import WhyDifferSection from "@/components/marketing/WhyDifferSection";
 import Footer from "@/components/marketing/Footer";
 
 export default async function Home() {
@@ -17,6 +19,8 @@ export default async function Home() {
       <PipelineTrace />
       <ArchitectureSection />
       <InstallSection />
+      <PricingSection />
+      <WhyDifferSection />
       <Footer />
     </main>
   );

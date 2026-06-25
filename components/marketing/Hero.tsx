@@ -82,7 +82,7 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
             </a>
           </div>
           <Link
-            href={isLoggedIn ? "/dashboard" : "/login"}
+            href={isLoggedIn ? "/dashboard" : "/signup"}
             className="hover-dim transition-fast"
             style={{
               fontFamily: "var(--font-sans)",
@@ -163,7 +163,7 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
 
           <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
             <Link
-              href={isLoggedIn ? "/dashboard" : "/login"}
+              href={isLoggedIn ? "/dashboard" : "/signup"}
               className="hover-dim transition-fast"
               style={{
                 fontFamily: "var(--font-sans)",
