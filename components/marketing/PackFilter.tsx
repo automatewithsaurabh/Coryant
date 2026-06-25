@@ -299,13 +299,7 @@ export default function PackFilter() {
           color: "var(--ink-faint)",
         }}
       >
-        More packs in development.{" "}
-        <a
-          href="mailto:hello@coryant.xyz"
-          style={{ color: "var(--accent)", textDecoration: "none" }}
-        >
-          Request a vertical →
-        </a>
+        More packs in development.
       </div>
     </>
   );

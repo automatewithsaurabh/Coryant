@@ -8,11 +8,6 @@ const productLinks = [
   { label: "Install", href: "/#get-started" },
 ];
 
-const communityLinks = [
-  { label: "Discord", href: "#discord" },
-  { label: "X / Twitter", href: "#twitter" },
-  { label: "GitHub", href: "#github" },
-];
 
 export default function Footer() {
   return (
@@ -30,7 +25,7 @@ export default function Footer() {
           maxWidth: "1100px",
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "1fr 160px 200px",
+          gridTemplateColumns: "1fr 160px",
           gap: "48px",
           paddingBottom: "40px",
           borderBottom: "1px solid var(--rule)",
@@ -107,37 +102,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* COL 3: community */}
-        <div>
-          <p
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "10px",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "var(--ink-faint)",
-              marginBottom: "16px",
-            }}
-          >
-            COMMUNITY
-          </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {communityLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="hover-accent transition-fast"
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "13px",
-                  color: "var(--ink-soft)",
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* BOTTOM BAR */}
@@ -159,17 +123,6 @@ export default function Footer() {
         >
           © 2026 CORYANT
         </span>
-        <a
-          href="mailto:hello@coryant.xyz"
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "11px",
-            color: "var(--ink-faint)",
-            textDecoration: "none",
-          }}
-        >
-          hello@coryant.xyz
-        </a>
       </div>
 
       <style>{`
