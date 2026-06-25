@@ -75,7 +75,7 @@ export async function sendPurchaseConfirmationEmail({
             <td style="padding:20px 40px;border-top:1px solid #2a2824;">
               <p style="margin:0;font-family:monospace;font-size:11px;color:#5a5550;line-height:1.7;">
                 Questions? Reply to this email or contact us at
-                <a href="mailto:saurabh.ahire93@gmail.com" style="color:#8a8480;text-decoration:none;">saurabh.ahire93@gmail.com</a>
+                <a href="mailto:hello@coryant.xyz" style="color:#8a8480;text-decoration:none;">hello@coryant.xyz</a>
               </p>
             </td>
           </tr>
@@ -100,7 +100,7 @@ What's next:
 3. Enable web search in Claude
 4. Paste the example brief from the pack page to get started
 
-Questions? Contact us at saurabh.ahire93@gmail.com
+Questions? Contact us at hello@coryant.xyz
 `;
 
   const { error } = await resend.emails.send({

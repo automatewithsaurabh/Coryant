@@ -6,7 +6,7 @@ const productLinks = [
   { label: "Career Pack", href: "/packs/career" },
   { label: "Pipeline", href: "/#pipeline" },
   { label: "Install", href: "/#get-started" },
-  { label: "Contact Us", href: "https://mail.google.com/mail/?view=cm&to=saurabh.ahire93@gmail.com&su=Coryant%20Enquiry" },
+  { label: "Contact Us", href: "mailto:hello@coryant.xyz?subject=Coryant%20Enquiry" },
 ];
 
 
