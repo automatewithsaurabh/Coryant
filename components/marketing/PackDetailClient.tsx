@@ -7,6 +7,7 @@ import SectionLabel from "./SectionLabel";
 import BinaryStream from "./BinaryStream";
 import Footer from "./Footer";
 import RazorpayButton from "./RazorpayButton";
+import DownloadButton from "@/components/dashboard/DownloadButton";
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -509,25 +510,7 @@ export default function PackDetailClient({
 
           {isLoggedIn && hasPurchased && (
             <div>
-              <a
-                href={`/api/download/${pack.slug}`}
-                download={`coryant-${pack.slug}.zip`}
-                className="hover-dim transition-fast"
-                style={{
-                  display: "inline-block",
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                  background: "var(--accent)",
-                  color: "var(--ink)",
-                  padding: "12px 24px",
-                  borderRadius: "4px",
-                  textDecoration: "none",
-                }}
-              >
-                Download {pack.name} →
-              </a>
+              <DownloadButton slug={pack.slug} packName={pack.name} />
               <p
                 style={{
                   fontFamily: "var(--font-mono)",
