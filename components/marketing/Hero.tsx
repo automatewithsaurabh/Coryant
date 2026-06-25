@@ -66,13 +66,13 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
             >
               HOW IT WORKS
             </a>
-            <Link
-              href="/pricing"
+            <a
+              href="/#pricing"
               className="hover-accent transition-fast"
               style={{ color: "var(--ink-soft)" }}
             >
               PRICING
-            </Link>
+            </a>
             <a
               href="/#get-started"
               className="hover-accent transition-fast"

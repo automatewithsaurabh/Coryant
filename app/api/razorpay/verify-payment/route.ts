@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHmac } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { isValidPackSlug } from "@/lib/build-pack-zip";
+import { rateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (!rateLimit(ip, 5, 60_000)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -49,7 +55,10 @@ export async function POST(request: NextRequest) {
     .update(`${razorpay_order_id}|${razorpay_payment_id}`)
     .digest("hex");
 
-  if (expected !== razorpay_signature) {
+  // Constant-time comparison prevents timing side-channel attacks
+  const expectedBuf = Buffer.from(expected, "hex");
+  const actualBuf = Buffer.from(razorpay_signature.padEnd(expected.length, "0").slice(0, expected.length), "hex");
+  if (expectedBuf.length !== actualBuf.length || !timingSafeEqual(expectedBuf, actualBuf) || expected !== razorpay_signature) {
     return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 });
   }
 

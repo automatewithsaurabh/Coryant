@@ -79,9 +79,11 @@ export default function AuthForm({ defaultMode = "login" }: { defaultMode?: Mode
     if (mode === "login") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
-        setError(error.message);
+        // Normalize all login errors to prevent account enumeration
+        setError("Invalid email or password. Please try again.");
       } else {
-        const next = searchParams.get("next") ?? "/dashboard";
+        const rawNext = searchParams.get("next") ?? "/dashboard";
+        const next = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/dashboard";
         router.push(next);
         router.refresh();
       }
@@ -96,7 +98,7 @@ export default function AuthForm({ defaultMode = "login" }: { defaultMode?: Mode
         password,
         options: {
           data: { full_name: name, profession },
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL ?? window.location.origin}/auth/callback`,
         },
       });
       if (error) {

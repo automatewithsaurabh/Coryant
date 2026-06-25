@@ -32,6 +32,11 @@ export async function GET(
 
   const { slug } = await params;
 
+  // Validate slug against allowlist before it touches the database
+  if (!isValidPackSlug(slug)) {
+    return NextResponse.json({ error: "Pack not found" }, { status: 404 });
+  }
+
   const admin = createAdminClient();
   const { data: purchase } = await admin
     .from("purchases")
@@ -42,10 +47,6 @@ export async function GET(
     .maybeSingle();
   if (!purchase) {
     return NextResponse.json({ error: "Purchase required" }, { status: 403 });
-  }
-
-  if (!isValidPackSlug(slug)) {
-    return NextResponse.json({ error: "Pack not found" }, { status: 404 });
   }
 
   try {
