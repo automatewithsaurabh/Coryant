@@ -6,6 +6,7 @@ const productLinks = [
   { label: "Career Pack", href: "/packs/career" },
   { label: "Pipeline", href: "/#pipeline" },
   { label: "Install", href: "/#get-started" },
+  { label: "Contact Us", href: "https://mail.google.com/mail/?view=cm&to=saurabh.ahire93@gmail.com&su=Coryant%20Enquiry" },
 ];
 
 
@@ -89,6 +90,8 @@ export default function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="hover-accent transition-fast"
                 style={{
                   fontFamily: "var(--font-sans)",
