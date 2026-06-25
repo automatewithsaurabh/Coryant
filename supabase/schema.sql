@@ -15,6 +15,10 @@ create table if not exists public.purchases (
   created_at                  timestamptz not null default now()
 );
 
+-- One purchase record per user per pack — prevents duplicate rows from double-clicks or retries.
+alter table public.purchases
+  add constraint if not exists purchases_user_pack_unique unique (user_id, pack_slug);
+
 -- Index for the most common query: "has this user bought this pack?"
 create index if not exists purchases_user_pack_idx
   on public.purchases (user_id, pack_slug);
