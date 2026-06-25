@@ -93,7 +93,7 @@ export default function AuthForm({ defaultMode = "login" }: { defaultMode?: Mode
         setLoading(false);
         return;
       }
-      const { error } = await supabase.auth.signUp({
+      const { data: signUpData, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -104,6 +104,10 @@ export default function AuthForm({ defaultMode = "login" }: { defaultMode?: Mode
       if (error) {
         const msg = error.message && error.message !== "{}" ? error.message : "Sign up failed. Please try again.";
         setError(msg);
+      } else if (signUpData.session) {
+        // Email confirmation is disabled — user is already logged in
+        router.push("/dashboard");
+        router.refresh();
       } else {
         setInfo("Check your email for a confirmation link to activate your account.");
       }
