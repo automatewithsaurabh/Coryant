@@ -58,6 +58,7 @@ export default async function PackPage({
       .select("id")
       .eq("user_id", user.id)
       .eq("pack_slug", slug)
+      .limit(1)
       .maybeSingle();
     hasPurchased = !!data;
   }

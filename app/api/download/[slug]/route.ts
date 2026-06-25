@@ -38,6 +38,7 @@ export async function GET(
     .select("id")
     .eq("user_id", user.id)
     .eq("pack_slug", slug)
+    .limit(1)
     .maybeSingle();
   if (!purchase) {
     return NextResponse.json({ error: "Purchase required" }, { status: 403 });
