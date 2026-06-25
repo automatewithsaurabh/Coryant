@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildPackZip, isValidPackSlug } from "@/lib/build-pack-zip";
 import { rateLimit } from "@/lib/rate-limit";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -32,7 +32,8 @@ export async function GET(
 
   const { slug } = await params;
 
-  const { data: purchase } = await supabase
+  const admin = createAdminClient();
+  const { data: purchase } = await admin
     .from("purchases")
     .select("id")
     .eq("user_id", user.id)
