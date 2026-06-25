@@ -1,27 +1,17 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { buildPackZip } from "@/lib/build-pack-zip";
 
 export const runtime = "nodejs";
 
 export async function GET() {
-  const cwd = process.cwd();
-  const skillsRoot = path.join(cwd, "coryant-skills");
-  const gtmPath = path.join(skillsRoot, "coryant-gtm");
-  const orchestratorPath = path.join(skillsRoot, "ORCHESTRATOR.md");
-
-  let skillsContents: string[] = [];
-  let gtmContents: string[] = [];
-
-  try { skillsContents = fs.readdirSync(skillsRoot); } catch { skillsContents = []; }
-  try { gtmContents = fs.readdirSync(gtmPath); } catch { gtmContents = []; }
-
-  return NextResponse.json({
-    cwd,
-    skills_root_exists: fs.existsSync(skillsRoot),
-    gtm_folder_exists: fs.existsSync(gtmPath),
-    orchestrator_exists: fs.existsSync(orchestratorPath),
-    skills_root_contents: skillsContents,
-    gtm_contents: gtmContents,
-  });
+  try {
+    const buf = await buildPackZip("gtm");
+    return NextResponse.json({ success: true, zip_bytes: buf.length });
+  } catch (err) {
+    return NextResponse.json({
+      success: false,
+      error: err instanceof Error ? err.message : String(err),
+      stack: err instanceof Error ? err.stack : null,
+    });
+  }
 }
