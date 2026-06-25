@@ -47,7 +47,7 @@ export default function RazorpayButton({ packSlug, packName, onSuccess }: Props)
       });
       const orderData = await orderRes.json();
       if (!orderRes.ok) {
-        throw new Error(orderData.error ?? "Failed to create order");
+        throw new Error(orderData.error ?? `Order creation failed (${orderRes.status})`);
       }
 
       // Step 2: open Razorpay modal
