@@ -23,10 +23,20 @@ export default function DashboardClient({
   const router = useRouter();
   const supabase = createClient();
 
+  const purchasedSlugs = new Set(purchases.map((p) => p.pack_slug));
+
   async function signOut() {
     await supabase.auth.signOut();
     router.push("/");
     router.refresh();
+  }
+
+  function formatDate(iso: string) {
+    return new Date(iso).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
   }
 
   return (
@@ -229,7 +239,7 @@ export default function DashboardClient({
                   </div>
                 </div>
 
-                {/* RIGHT: download */}
+                {/* RIGHT: download or buy */}
                 <div
                   style={{
                     display: "flex",
@@ -240,49 +250,162 @@ export default function DashboardClient({
                     flexShrink: 0,
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "10px",
-                      color: "var(--accent)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    ● AVAILABLE
-                  </span>
-                  <a
-                    href={`/api/download/${pack.slug}`}
-                    download={`coryant-${pack.slug}.zip`}
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "11px",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--ink)",
-                      background: "var(--accent)",
-                      borderRadius: "4px",
-                      padding: "10px 20px",
-                      textDecoration: "none",
-                      whiteSpace: "nowrap",
-                      display: "inline-block",
-                    }}
-                  >
-                    Download →
-                  </a>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "10px",
-                      color: "var(--ink-faint)",
-                    }}
-                  >
-                    .zip · includes ORCHESTRATOR
-                  </span>
+                  {purchasedSlugs.has(pack.slug) ? (
+                    <>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                        ● PURCHASED
+                      </span>
+                      <a
+                        href={`/api/download/${pack.slug}`}
+                        download={`coryant-${pack.slug}.zip`}
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: "11px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                          color: "var(--ink)",
+                          background: "var(--accent)",
+                          borderRadius: "4px",
+                          padding: "10px 20px",
+                          textDecoration: "none",
+                          whiteSpace: "nowrap",
+                          display: "inline-block",
+                        }}
+                      >
+                        Download →
+                      </a>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)" }}>
+                        .zip · includes ORCHESTRATOR
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                        ○ NOT PURCHASED
+                      </span>
+                      <a
+                        href={`/packs/${pack.slug}`}
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: "11px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                          color: "var(--ink)",
+                          background: "var(--bg-raised)",
+                          border: "1px solid var(--rule-strong)",
+                          borderRadius: "4px",
+                          padding: "10px 20px",
+                          textDecoration: "none",
+                          whiteSpace: "nowrap",
+                          display: "inline-block",
+                        }}
+                      >
+                        Buy ₹2,900 →
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* ── PURCHASE HISTORY ── */}
+        <div style={{ marginTop: "56px", paddingTop: "40px", borderTop: "1px solid var(--rule)", marginBottom: "56px" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "11px",
+              color: "var(--ink-faint)",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              marginBottom: "24px",
+            }}
+          >
+            PURCHASE HISTORY · {purchases.length} {purchases.length === 1 ? "ORDER" : "ORDERS"}
+          </p>
+
+          {purchases.length === 0 ? (
+            <p style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "var(--ink-faint)" }}>
+              No purchases yet.
+            </p>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "var(--rule)" }}>
+              {/* Header */}
+              <div
+                style={{
+                  background: "var(--bg-raised)",
+                  padding: "10px 24px",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 160px 160px 120px",
+                  gap: "16px",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "10px",
+                  color: "var(--ink-faint)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                }}
+              >
+                <span>Pack</span>
+                <span>Order ID</span>
+                <span>Date</span>
+                <span></span>
+              </div>
+
+              {purchases.map((p) => {
+                const pack = Object.values(PACKS).find((pk) => pk.slug === p.pack_slug);
+                return (
+                  <div
+                    key={p.id}
+                    className="hist-row"
+                    style={{
+                      background: "var(--bg)",
+                      padding: "18px 24px",
+                      display: "grid",
+                      gridTemplateColumns: "1fr 160px 160px 120px",
+                      gap: "16px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div>
+                      <p style={{ fontFamily: "var(--font-sans)", fontSize: "14px", color: "var(--ink)", marginBottom: "2px" }}>
+                        {pack?.name ?? p.pack_slug}
+                      </p>
+                      <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                        {p.currency} {p.amount_total ? (p.amount_total / 100).toLocaleString("en-IN") : "2,900"}
+                      </p>
+                    </div>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {p.stripe_checkout_session_id ?? "—"}
+                    </span>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink-soft)" }}>
+                      {p.created_at ? formatDate(p.created_at) : "—"}
+                    </span>
+                    <a
+                      href={`/api/download/${p.pack_slug}`}
+                      download={`coryant-${p.pack_slug}.zip`}
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "10px",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                        color: "var(--ink)",
+                        background: "var(--accent)",
+                        borderRadius: "4px",
+                        padding: "8px 14px",
+                        textDecoration: "none",
+                        whiteSpace: "nowrap",
+                        display: "inline-block",
+                        textAlign: "center",
+                      }}
+                    >
+                      Download →
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* ── INSTALL REMINDER ── */}
@@ -355,6 +478,8 @@ export default function DashboardClient({
         @media (max-width: 768px) {
           .dash-pack-row { grid-template-columns: 1fr !important; gap: 24px !important; }
           .dash-install { grid-template-columns: 1fr !important; }
+          .hist-row { grid-template-columns: 1fr auto !important; }
+          .hist-row span:nth-child(2), .hist-row span:nth-child(3) { display: none !important; }
         }
         @media (max-width: 480px) {
           .dash-email { display: none !important; }

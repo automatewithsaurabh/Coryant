@@ -1,11 +1,13 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createAdminClient } from "@/lib/supabase/server";
 import DashboardClient from "@/components/dashboard/DashboardClient";
 
 export const metadata: Metadata = {
   title: "Dashboard — CORYANT",
 };
+
+export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -13,9 +15,11 @@ export default async function DashboardPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: purchases } = await supabase
+  const admin = createAdminClient();
+  const { data: purchases } = await admin
     .from("purchases")
     .select("*")
+    .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
   const name = (user.user_metadata?.full_name as string | undefined) ?? "";
