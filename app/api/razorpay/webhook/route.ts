@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "crypto";
 import { createAdminClient } from "@/lib/supabase/server";
+import { sendPurchaseConfirmationEmail } from "@/lib/send-purchase-email";
+import { PACKS } from "@/lib/packs-data";
 
 export const runtime = "nodejs";
 
@@ -54,24 +56,40 @@ export async function POST(request: NextRequest) {
 
     const admin = createAdminClient();
 
-    // Upsert so this is idempotent — Razorpay may retry the webhook
-    const { error } = await admin.from("purchases").upsert(
-      {
+    // Check if already recorded (verify-payment may have beaten us)
+    const { data: existing } = await admin
+      .from("purchases")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("pack_slug", packSlug)
+      .limit(1)
+      .maybeSingle();
+
+    if (!existing) {
+      const { error } = await admin.from("purchases").insert({
         user_id: userId,
         pack_slug: packSlug,
         stripe_checkout_session_id: orderId,
         stripe_payment_intent_id: paymentId,
         amount_total: amount,
         currency: "INR",
-      },
-      { onConflict: "user_id,pack_slug", ignoreDuplicates: true }
-    );
+      });
 
-    if (error) {
-      console.error("Webhook: failed to record purchase:", error.message);
-      // Return 200 anyway — returning 4xx/5xx causes Razorpay to retry forever
-    } else {
-      console.log(`Webhook: purchase recorded — user ${userId}, pack ${packSlug}`);
+      if (error && error.code !== "23505") {
+        console.error("Webhook: failed to record purchase:", error.message);
+      } else if (!error) {
+        console.log(`Webhook: purchase recorded — user ${userId}, pack ${packSlug}`);
+        // Send confirmation email — only when webhook is the one recording the purchase
+        const { data: userData } = await admin.auth.admin.getUserById(userId);
+        if (userData?.user?.email) {
+          const packName = PACKS[packSlug as keyof typeof PACKS]?.name ?? packSlug;
+          sendPurchaseConfirmationEmail({
+            to: userData.user.email,
+            packName,
+            slug: packSlug,
+          }).catch(() => {});
+        }
+      }
     }
   }
 
