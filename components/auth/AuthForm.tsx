@@ -102,7 +102,8 @@ export default function AuthForm({ defaultMode = "login" }: { defaultMode?: Mode
         },
       });
       if (error) {
-        setError(error.message);
+        const msg = error.message && error.message !== "{}" ? error.message : "Sign up failed. Please try again.";
+        setError(msg);
       } else {
         setInfo("Check your email for a confirmation link to activate your account.");
       }
