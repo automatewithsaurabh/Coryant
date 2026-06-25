@@ -16,10 +16,12 @@ export default function PackDetailClient({
   pack,
   isLoggedIn,
   hasPurchased: initialHasPurchased,
+  userEmail,
 }: {
   pack: Pack;
   isLoggedIn: boolean;
   hasPurchased: boolean;
+  userEmail: string | null;
 }) {
   const [hasPurchased, setHasPurchased] = useState(initialHasPurchased);
   const otherPacks = (Object.values(PACKS) as Pack[]).filter(
@@ -489,6 +491,7 @@ export default function PackDetailClient({
               <RazorpayButton
                 packSlug={pack.slug}
                 packName={pack.name}
+                userEmail={userEmail}
                 onSuccess={() => setHasPurchased(true)}
               />
               <p

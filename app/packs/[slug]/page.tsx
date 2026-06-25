@@ -62,5 +62,5 @@ export default async function PackPage({
     hasPurchased = !!data;
   }
 
-  return <PackDetailClient pack={pack} isLoggedIn={!!user} hasPurchased={hasPurchased} />;
+  return <PackDetailClient pack={pack} isLoggedIn={!!user} hasPurchased={hasPurchased} userEmail={user?.email ?? null} />;
 }

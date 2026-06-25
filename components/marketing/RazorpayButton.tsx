@@ -12,10 +12,11 @@ declare global {
 interface Props {
   packSlug: string;
   packName: string;
+  userEmail: string | null;
   onSuccess: () => void;
 }
 
-export default function RazorpayButton({ packSlug, packName, onSuccess }: Props) {
+export default function RazorpayButton({ packSlug, packName, userEmail, onSuccess }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [scriptReady, setScriptReady] = useState(false);
@@ -85,7 +86,11 @@ export default function RazorpayButton({ packSlug, packName, onSuccess }: Props)
           modal: {
             ondismiss: () => reject(new Error("cancelled")),
           },
-          prefill: {},
+          prefill: {
+            email: userEmail ?? "",
+            name: "Coryant User",
+            contact: "",
+          },
           theme: { color: "#4f8ef7" },
         };
 
