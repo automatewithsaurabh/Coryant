@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRazorpayOrder, getPackPricePaise } from "@/lib/razorpay";
+import { createRazorpayOrder, getPackPricePaise } from "@/lib/rzp";
 import { createClient } from "@/lib/supabase/server";
 import { rateLimit } from "@/lib/rate-limit";
 import { isValidPackSlug } from "@/lib/build-pack-zip";
