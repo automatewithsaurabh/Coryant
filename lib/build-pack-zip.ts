@@ -20,13 +20,13 @@ const FOLDER_NAMES: Record<string, string> = {
   career: "coryant-career",
   gtm: "coryant-gtm",
   pm: "coryant-pm",
-  "founders-associate": "coryant-founders-associate",
-  "chartered-accountant": "coryant-chartered-accountant",
+  "founders-associate": "coryant-founder",
+  "chartered-accountant": "coryant-ca",
   content: "coryant-content",
   sales: "coryant-sales",
-  "supply-chain": "coryant-supply-chain",
-  tutor: "coryant-tutor",
-  "real-estate": "coryant-real-estate",
+  "supply-chain": "coryant-scm",
+  tutor: "coryant-academy",
+  "real-estate": "coryant-realestate",
 };
 
 const SKILLS_ROOT = path.join(process.cwd(), "coryant-skills");
