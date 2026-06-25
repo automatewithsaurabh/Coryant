@@ -3,6 +3,8 @@ import { createHmac, timingSafeEqual } from "crypto";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { isValidPackSlug } from "@/lib/build-pack-zip";
 import { rateLimit } from "@/lib/rate-limit";
+import { sendPurchaseConfirmationEmail } from "@/lib/send-purchase-email";
+import { PACKS } from "@/lib/packs-data";
 
 export const runtime = "nodejs";
 
@@ -73,8 +75,9 @@ export async function POST(request: NextRequest) {
     .limit(1)
     .maybeSingle();
 
+  let isNewPurchase = false;
+
   if (!existing) {
-    // No record yet — insert it
     const { error: dbError } = await admin.from("purchases").insert({
       user_id: user.id,
       pack_slug: slug,
@@ -90,7 +93,15 @@ export async function POST(request: NextRequest) {
         console.error("Failed to record purchase:", dbError.message, dbError.code);
         return NextResponse.json({ error: "Payment verified but failed to activate. Contact support." }, { status: 500 });
       }
+    } else {
+      isNewPurchase = true;
     }
+  }
+
+  // Send confirmation email for new purchases (fire-and-forget — don't block the response)
+  if (isNewPurchase && user.email) {
+    const packName = PACKS[slug as keyof typeof PACKS]?.name ?? slug;
+    sendPurchaseConfirmationEmail({ to: user.email, packName, slug }).catch(() => {});
   }
 
   return NextResponse.json({ success: true });
