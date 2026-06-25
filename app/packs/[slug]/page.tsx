@@ -31,9 +31,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const pack = PACKS[slug as PackSlug];
   if (!pack) return {};
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://coryant.xyz";
+  const url = `${APP_URL}/packs/${slug}`;
   return {
-    title: `${pack.name} by Coryant`,
-    description: pack.tagline,
+    title: pack.name,
+    description: pack.description,
+    keywords: [pack.name, "Claude AI", "multi-agent", "research pack", "Coryant", "Claude Code skills"],
+    openGraph: {
+      title: `${pack.name} — Coryant`,
+      description: pack.tagline,
+      url,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${pack.name} — Coryant`,
+      description: pack.tagline,
+    },
+    alternates: { canonical: url },
   };
 }
 

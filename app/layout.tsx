@@ -20,15 +20,33 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://coryant.xyz";
+
 export const metadata: Metadata = {
-  title: "CORYANT : Multi-Agent Research Packs for Claude",
+  metadataBase: new URL(APP_URL),
+  title: {
+    default: "Coryant — Multi-Agent Research Packs for Claude",
+    template: "%s | Coryant",
+  },
   description:
-    "Install a full agent team, strategist, researchers, coordinator, synthesizer, directly into Claude Code or Claude.ai. No new account. No inference cost.",
+    "Install a full agent team — strategist, researchers, coordinator, synthesizer — directly into Claude Code or Claude.ai. No new account. No inference cost. One-time ₹1,999.",
+  keywords: ["Claude AI", "multi-agent", "research packs", "Claude Code skills", "AI research", "Coryant"],
+  authors: [{ name: "Coryant", url: APP_URL }],
+  creator: "Coryant",
   openGraph: {
-    title: "CORYANT : Multi-Agent Research Packs for Claude",
-    description:
-      "Coordinated research agents. Running on your Claude.",
+    title: "Coryant — Multi-Agent Research Packs for Claude",
+    description: "Coordinated research agents running on your Claude. Install in 2 minutes.",
+    url: APP_URL,
+    siteName: "Coryant",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Coryant — Multi-Agent Research Packs for Claude",
+    description: "Coordinated research agents running on your Claude. Install in 2 minutes.",
+  },
+  alternates: {
+    canonical: APP_URL,
   },
 };
 
