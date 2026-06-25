@@ -372,67 +372,64 @@ export default function DashboardClient({
           )}
         </div>
 
-        {/* ── INSTALL REMINDER ── */}
-        <div
-          className="dash-install"
-          style={{
-            marginTop: "48px",
-            padding: "28px 32px",
-            border: "1px solid var(--rule)",
-            borderRadius: "6px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "32px",
-          }}
-        >
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "11px",
-                color: "var(--ink-faint)",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: "10px",
-              }}
-            >
-              CLAUDE CODE
-            </p>
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", color: "var(--ink-soft)", lineHeight: 1.6, marginBottom: "12px" }}>
-              Download the pack, then copy it into your skills directory.
-            </p>
-            <pre
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "11px",
-                background: "var(--bg-raised)",
-                padding: "10px 14px",
-                borderRadius: "4px",
-                color: "var(--ink-soft)",
-                overflowX: "auto",
-                margin: 0,
-                lineHeight: 1.6,
-              }}
-            >
-              <code>{`cp -r coryant-[pack] ~/.claude/skills/\ncp ORCHESTRATOR.md ~/.claude/skills/coryant-[pack]/`}</code>
-            </pre>
-          </div>
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "11px",
-                color: "var(--ink-faint)",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: "10px",
-              }}
-            >
-              CLAUDE.AI PROJECTS
-            </p>
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", color: "var(--ink-soft)", lineHeight: 1.6 }}>
-              Create a new Project, upload all files in the pack plus ORCHESTRATOR.md, then start a chat with your brief.
-            </p>
+        {/* ── SETUP INSTRUCTIONS ── */}
+        <div style={{ marginTop: "48px" }}>
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink-faint)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "24px" }}>
+            HOW TO SET UP
+          </p>
+
+          <div className="dash-install" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+
+            {/* ── Claude.ai ── */}
+            <div style={{ border: "1px solid var(--rule)", borderRadius: "6px", padding: "28px 32px" }}>
+              <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "20px" }}>
+                CLAUDE.AI
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                {[
+                  { n: "1", text: "Download the pack from above — keep the file as a ZIP, do not extract it." },
+                  { n: "2", text: 'Open Claude.ai and click "Customise" at the bottom-left of the sidebar.' },
+                  { n: "3", text: 'Go to Connectors → Add Skill.' },
+                  { n: "4", text: "Upload the ZIP file when prompted." },
+                  { n: "5", text: "The skill is now active. Start a new chat and use it." },
+                ].map((step) => (
+                  <div key={step.n} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--accent)", flexShrink: 0, paddingTop: "2px" }}>{step.n}</span>
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", color: "var(--ink-soft)", lineHeight: 1.65, margin: 0 }}>{step.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Claude Code ── */}
+            <div style={{ border: "1px solid var(--rule)", borderRadius: "6px", padding: "28px 32px" }}>
+              <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "20px" }}>
+                CLAUDE CODE
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                {[
+                  { n: "1", text: "Download the pack and extract the ZIP into a folder of your choice." },
+                  { n: "2", text: 'A .claude folder is already inside — do not delete or rename it.' },
+                  { n: "3", text: "Press Win + R, type cmd, and hit Enter to open a terminal." },
+                  { n: "4", text: 'Type the command below and press Enter — replace the path with your actual folder location.' },
+                  { n: "5", text: 'Type claude and press Enter. Sign in to your Claude account when prompted.' },
+                  { n: "6", text: "You are now inside Claude Code with the pack active. Run your first skill." },
+                ].map((step) => (
+                  <div key={step.n} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--accent)", flexShrink: 0, paddingTop: "2px" }}>{step.n}</span>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", color: "var(--ink-soft)", lineHeight: 1.65, margin: 0 }}>{step.text}</p>
+                      {step.n === "4" && (
+                        <pre style={{ fontFamily: "var(--font-mono)", fontSize: "11px", background: "var(--bg-raised)", padding: "8px 12px", borderRadius: "4px", color: "var(--ink-soft)", margin: "8px 0 0", overflowX: "auto", lineHeight: 1.6 }}>
+                          <code>{`cd "C:\\path\\to\\your\\pack-folder"`}</code>
+                        </pre>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
 
