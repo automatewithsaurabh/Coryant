@@ -27,12 +27,12 @@ const securityHeaders = [
       "default-src 'self'",
       // React needs 'unsafe-eval' in dev; Razorpay checkout.js always allowed
       isDev
-        ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com"
-        : "script-src 'self' 'unsafe-inline' https://checkout.razorpay.com",
+        ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://www.googletagmanager.com"
+        : "script-src 'self' 'unsafe-inline' https://checkout.razorpay.com https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline'",
       "font-src 'self'",
       "img-src 'self' data: https://*.razorpay.com",
-      `connect-src ${connectSrc}`,
+      `connect-src ${connectSrc} https://www.google-analytics.com`,
       // Razorpay checkout opens its payment modal in an iframe
       "frame-src 'self' https://*.razorpay.com",
       "frame-ancestors 'none'",
