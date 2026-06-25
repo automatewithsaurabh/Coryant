@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { PACKS } from "@/lib/packs-data";
 import type { Database } from "@/lib/supabase/types";
+import DownloadButton from "@/components/dashboard/DownloadButton";
 
 type Purchase = Database["public"]["Tables"]["purchases"]["Row"];
 
@@ -255,25 +256,7 @@ export default function DashboardClient({
                       <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                         ● PURCHASED
                       </span>
-                      <a
-                        href={`/api/download/${pack.slug}`}
-                        download={`coryant-${pack.slug}.zip`}
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: "11px",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.06em",
-                          color: "var(--ink)",
-                          background: "var(--accent)",
-                          borderRadius: "4px",
-                          padding: "10px 20px",
-                          textDecoration: "none",
-                          whiteSpace: "nowrap",
-                          display: "inline-block",
-                        }}
-                      >
-                        Download →
-                      </a>
+                      <DownloadButton slug={pack.slug} packName={pack.name} />
                       <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-faint)" }}>
                         .zip · includes ORCHESTRATOR
                       </span>
@@ -381,26 +364,7 @@ export default function DashboardClient({
                     <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink-soft)" }}>
                       {p.created_at ? formatDate(p.created_at) : "—"}
                     </span>
-                    <a
-                      href={`/api/download/${p.pack_slug}`}
-                      download={`coryant-${p.pack_slug}.zip`}
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "10px",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.06em",
-                        color: "var(--ink)",
-                        background: "var(--accent)",
-                        borderRadius: "4px",
-                        padding: "8px 14px",
-                        textDecoration: "none",
-                        whiteSpace: "nowrap",
-                        display: "inline-block",
-                        textAlign: "center",
-                      }}
-                    >
-                      Download →
-                    </a>
+                    <DownloadButton slug={p.pack_slug ?? ""} packName={pack?.name ?? p.pack_slug ?? ""} />
                   </div>
                 );
               })}
