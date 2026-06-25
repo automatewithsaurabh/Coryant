@@ -20,8 +20,10 @@ export default function DownloadButton({ slug, packName }: { slug: string; packN
       const a = document.createElement("a");
       a.href = url;
       a.download = `coryant-${slug}.zip`;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
       setStatus("idle");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Download failed");
