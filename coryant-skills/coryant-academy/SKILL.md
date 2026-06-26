@@ -1,3 +1,9 @@
+---
+name: coryant-academy
+description: Academic intelligence pack for tutors and researchers — session preparation, concept explanation, practice problem generation, misconception diagnosis, live literature mapping, research gap analysis, academic writing support, and grant preparation. Requires web search enabled.
+argument-hint: <brief: role (tutor or researcher), subject/topic, level or audience, and the moment type — SESSION_PREP / CONCEPT_EXPLAIN / PROBLEM_SET / MISCONCEPTION_HUNT / LIT_MAP / GAP_FINDER / PAPER_CRAFT / GRANT_PREP>
+---
+
 # CORYANT Academy — Intelligence Pack for Tutors and Researchers
 
 ## What This Is

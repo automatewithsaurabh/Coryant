@@ -1,3 +1,9 @@
+---
+name: coryant-scm
+description: Supply chain and procurement intelligence pack for procurement managers, supply chain strategists, and operations leaders — supplier research, supplier risk, tariff and trade compliance, alternative sourcing, market benchmarks, disruption scanning, negotiation preparation, and supply network analysis. Requires web search enabled.
+argument-hint: <brief: moment type (SUPPLIER_INTEL / SUPPLIER_RISK / TARIFF_TRADE_WATCH / ALTERNATIVE_SOURCING / MARKET_BENCHMARK / DISRUPTION_SCAN / NEGOTIATION_PREP / NETWORK_INTEL), supplier name or category, geography, and the decision pending>
+---
+
 # CORYANT Supply Chain — Strategic Intelligence Pack
 
 ## What This Is

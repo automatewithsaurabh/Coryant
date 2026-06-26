@@ -1,3 +1,9 @@
+---
+name: coryant-realestate
+description: Real estate intelligence pack for property investors, commercial landlords, and developers — acquisition intelligence, market timing, deal modelling, portfolio optimisation, tenant covenant analysis, lease review, planning viability, and development feasibility. Every output opens with a staked BUY / PASS / NEGOTIATE verdict. Requires web search enabled.
+argument-hint: <brief: moment type (ACQUISITION_INTEL / MARKET_TIMING / DEAL_MODEL / PORTFOLIO_OPTIMISE / TENANT_COVENANT / LEASE_ANALYSIS / PLANNING_VIABILITY / DEVELOPMENT_STACK), property or deal details, jurisdiction (UK / US / India / Europe)>
+---
+
 # CORYANT Real Estate
 
 **Decision-grade intelligence for property investors, developers, and commercial landlords.**
