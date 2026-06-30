@@ -33,6 +33,14 @@ export const metadata: Metadata = {
   keywords: ["Claude AI", "multi-agent", "research packs", "Claude Code skills", "AI research", "Coryant"],
   authors: [{ name: "Coryant", url: APP_URL }],
   creator: "Coryant",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
   openGraph: {
     title: "Coryant — Multi-Agent Research Packs for Claude",
     description: "Coordinated research agents running on your Claude. Install in 2 minutes.",
