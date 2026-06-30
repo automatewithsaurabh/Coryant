@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import BinaryStream from "./BinaryStream";
 import AgentGraph from "./AgentGraph";
 
@@ -31,6 +32,9 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
       >
         <span
           style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
             fontFamily: "var(--font-mono)",
             fontSize: "14px",
             textTransform: "uppercase",
@@ -38,6 +42,7 @@ export default function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
             color: "var(--ink)",
           }}
         >
+          <Image src="/logo.png" alt="Coryant logo" width={24} height={24} style={{ display: "block" }} />
           CORYANT
         </span>
 
